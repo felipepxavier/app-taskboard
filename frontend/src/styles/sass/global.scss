@@ -1,0 +1,18 @@
+@import '../../../node_modules/react-md/src/scss/globals';
+@import '../../../node_modules/react-md/src/scss/react-md';
+
+$md-primary-color: #505050;
+
+$md-indigo-500: #505050;
+
+$md-light-theme:#505050;
+
+$md-secondary-color: #505050;
+$md-data-table-contextual-fallback-color:#505050;
+
+@include react-md-everything;
+
+
+
+
+
