@@ -54,8 +54,7 @@ class UserController {
       // const avatarUm = await user.file().fetch();
       // console.log(avatarUm)
 
-      const avatar = await File
-      .query()
+      const avatar = await File.query()
       .where('id', file_id)
       .first()
 

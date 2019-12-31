@@ -5,10 +5,12 @@ const Task = use('App/Models/Task')
 
 class TaskController {
 
-  async index ({ params }) {
+  async index ({ request, response, auth }) {
+    const user_id = auth.user.id;
+
     const tasks = await Task.query()
-      .where('project_id', params.projects_id)
-      .with('user')
+      .where('user_id', user_id)
+      // .with('user')
       .fetch()
 
       return tasks

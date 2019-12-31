@@ -25,7 +25,7 @@ import { createTaskRequest } from '~/store/modules/task/actions';
 
 import { Container } from './styles';
 
-export default function Task(){
+export default function TaskDialog(){
 
   const [ visible, setVisible ] = useState(false);
   const [ renderNode, setRenderNode ] = useState(null);

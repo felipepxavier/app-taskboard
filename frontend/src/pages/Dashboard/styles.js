@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 
-export const TaskList = styled.ul`
+export const Task = styled.li`
 
 
 `;
