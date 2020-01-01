@@ -75,9 +75,9 @@ export default function TaskDialog(){
   }];
 
   const colourOptions = [
-    { value: 'baixa', color: '#e6d76a', label: 'Baixa' },
-    { value: 'media', color: '#e29828', label: 'Media' },
-    { value: 'alta', color: '#e22828', label: 'Alta' }
+    { value: 'Baixa', color: '#e6d76a', label: 'Baixa' },
+    { value: 'Média', color: '#e29828', label: 'Media' },
+    { value: 'Alta', color: '#e22828', label: 'Alta' }
   ];
 
   const SingleValue = ({ children, ...props }) => (

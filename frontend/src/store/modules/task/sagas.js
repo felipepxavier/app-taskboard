@@ -14,7 +14,7 @@ export function* createTask({ payload }) {
       deliveryDate } = payload.data;
 
       const provider_id = 1;
-      const status = 'pendente';
+      const status = 'Pendente';
 
     const response = yield call(api.post, 'tasks', {
       title,

@@ -14,30 +14,47 @@ export default function Dashboard() {
     async function loadTask() {
       const response = await api.get('tasks');
       const data = response.data;
-
+      console.log(data)
       setTask(data);
     }
     loadTask();
-  });
+  }, [task]);
 
   return (
 
     <Container>
       <TaskDialog />
-      <ul>
+    <table className="container">
+        <thead>
+          <tr>
+            <th><h1>Tarefa</h1></th>
+            <th><h1>Proprietário</h1></th>
+            <th><h1>Status</h1></th>
+            <th><h1>Prioridade</h1></th>
+            <th><h1>Entrega</h1></th>
+          </tr>
+        </thead>
       { task.map(task => (
 
-        <Task key={task.id}>
-          <strong>{task.title}</strong>
-          <strong>{task.description}</strong>
-          <strong>{task.deliveryDate}</strong>
-          <strong>{task.priorityValue}</strong>
-          <strong>{task.status}</strong>
+        <tbody>
+          <Task key={task.id}>
 
-        </Task>
+                <td>{task.title}</td>
+                <td>{task.provider.name}</td>
+                <td>{task.status}</td>
+                <td className={(
+                  task.priorityValue === 'Baixa') ?
+                  'baixa' :
+                  (task.priorityValue === 'Alta') ?
+                  'alta' :
+                  (task.priorityValue === 'Média') ?
+                  'media' :''}>{task.priorityValue}</td>
+                <td>{task.deliveryDate}</td>
 
+            </Task>
+        </tbody>
         ))}
-      </ul>
+    </table>
 
     </Container>
   )

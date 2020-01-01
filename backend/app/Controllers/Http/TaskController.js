@@ -10,7 +10,7 @@ class TaskController {
 
     const tasks = await Task.query()
       .where('user_id', user_id)
-      // .with('user')
+      .with('provider')
       .fetch()
 
       return tasks
