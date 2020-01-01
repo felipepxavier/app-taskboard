@@ -21,19 +21,23 @@ export const Container = styled.div`
 	  padding-top: 2%;
   }
 
-  .container tr:nth-child(odd) {
-	  background-color: #fff;
-  }
-
   .container th {
       background-color: #0e1e2b;
   }
 
   .container td:first-child {
-    border-left: 4px solid #E84B4B;
+    border-left: 7px solid #bdbdbd;
     padding-left: 5%;
     padding-right: 5%;
     text-align: left;
+  }
+
+  .btn-action{
+    width: 50px;
+  }
+
+  .btn-action td {
+    border: none!important;
   }
 
   td.baixa{
@@ -72,16 +76,24 @@ export const Container = styled.div`
 
 
 export const Task = styled.tr`
-  opacity: .8;
-  transition: opacity .1s ease-in-out;
+  transition: background .1s ease-in-out;
+  background: #ffffff;
 
   td {
-    padding-top: 5px!important;
-    padding-bottom: 5px!important;
+    padding-top: 2px!important;
+    padding-bottom: 2px!important;
   }
 
   &:hover {
-    opacity: 1;
+    background: #E4E4E4;
+  }
+
+  &:hover td:first-child{
+    border-left: 7px solid #e84b4b;
+  }
+
+  .avatar-prov img{
+    vertical-align: middle;
   }
 
   img {

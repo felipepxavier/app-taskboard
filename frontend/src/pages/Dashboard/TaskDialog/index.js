@@ -6,7 +6,6 @@ import { Form, Input } from '@rocketseat/unform';
 
 import { MdClear, MdFileUpload} from 'react-icons/md';
 
-
 import {
   Button,
   DialogContainer,

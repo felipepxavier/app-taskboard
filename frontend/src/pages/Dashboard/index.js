@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 
 import TaskDialog from './TaskDialog';
+import ButtonAction from './ButtonAction';
 
 import api from '~/services/api';
 
@@ -11,19 +12,13 @@ import { Tooltipped } from 'react-md';
 
 export default function Dashboard() {
 
-  // const taskCurrent = useSelector(state => state.task.taskCurrent);
-  // console.log(taskCurrent)
-
   const [task, setTask] = useState([]);
 
   useEffect(() => {
     async function loadTask() {
       const response = await api.get('tasks');
       const data = response.data;
-      console.log(data)
-      // data.map(task => (
-      //   console.log(task.provider.file_id)
-      // ));
+      // console.log(data)
 
       setTask(data);
 
@@ -56,8 +51,7 @@ export default function Dashboard() {
                     position="top"
                     setPosition
                   >
-                <td>{
-
+                <td className="avatar-prov">{
                     <img
                       src={
                         task.provider.file.url ||
@@ -65,7 +59,6 @@ export default function Dashboard() {
                       }
                       alt="Foto perfil"
                     />
-
                 }</td>
                 </Tooltipped>
                 <td>{task.status}</td>
@@ -77,6 +70,7 @@ export default function Dashboard() {
                   (task.priorityValue === 'Média') ?
                   'media' :''}>{task.priorityValue}</td>
                 <td>{task.deliveryDate}</td>
+                <td className="btn-action"><ButtonAction /></td>
 
             </Task>
         </tbody>
