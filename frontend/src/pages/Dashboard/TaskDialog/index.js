@@ -6,6 +6,7 @@ import { Form, Input } from '@rocketseat/unform';
 
 import { MdClear, MdFileUpload} from 'react-icons/md';
 
+
 import {
   Button,
   DialogContainer,
@@ -94,6 +95,7 @@ export default function TaskDialog(){
           onClick={show}
           aria-controls="modal-task"
           className="light-blue lighten-1"
+          tooltipLabel="Crie uma tarefa!" tooltipPosition="top"
         >
           <i className="material-icons mt-plus">add</i>
         </Button>

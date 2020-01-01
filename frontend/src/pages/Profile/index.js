@@ -70,7 +70,7 @@ export default function Profile() {
 
 
       <div>
-        <Button raised onClick={show}>Sair</Button>
+        <Button flat  className="btn-signout" onClick={show}>Sair</Button>
         <DialogContainer
           id="simple-action-dialog"
           visible={visible}

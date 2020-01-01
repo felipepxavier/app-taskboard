@@ -15,8 +15,6 @@ export default function task(state = INITIAL_STATE, action) {
       case '@task/CREATE_TASK_SUCCESS': {
         draft.taskCurrent = action.payload.task;
         draft.loading = false;
-
-        console.tron.log(draft.taskCurrent)
         break;
       }
       case '@task/CREATE_FAILURE': {

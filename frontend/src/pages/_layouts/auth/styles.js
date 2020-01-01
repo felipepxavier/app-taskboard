@@ -75,6 +75,7 @@ export const Content = styled.div`
     }
 
     h4 {
+      color: white;
       text-align: left;
     }
   }

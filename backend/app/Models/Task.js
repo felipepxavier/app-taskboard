@@ -13,6 +13,7 @@ class Task extends Model {
 
   provider () {/** a Task pertence a um Provider */
     return this.belongsTo('App/Models/Provider')
+
   }
 
   user () {/** a Task pertence a um User */

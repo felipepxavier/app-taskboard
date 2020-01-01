@@ -10,7 +10,7 @@ export const Container = styled.div`
   .container {
 	  text-align: center;
 	  overflow: hidden;
-	  width: 60%;
+	  width: 55%;
 	  margin: 0 auto;
     display: table;
     padding: 0 0 8em 0;
@@ -31,8 +31,8 @@ export const Container = styled.div`
 
   .container td:first-child {
     border-left: 4px solid #E84B4B;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding-left: 5%;
+    padding-right: 5%;
     text-align: left;
   }
 
@@ -73,9 +73,21 @@ export const Container = styled.div`
 
 export const Task = styled.tr`
   opacity: .8;
-  transition: opacity .2s ease-in-out;
+  transition: opacity .1s ease-in-out;
+
+  td {
+    padding-top: 5px!important;
+    padding-bottom: 5px!important;
+  }
 
   &:hover {
     opacity: 1;
+  }
+
+  img {
+    width: auto;
+    max-height: 40px;
+    border-radius: 50%;
+    padding: 0;
   }
 `;

@@ -10,10 +10,10 @@ class TaskController {
 
     const tasks = await Task.query()
       .where('user_id', user_id)
-      .with('provider')
+      .with('provider.file')
       .fetch()
 
-      return tasks
+    return tasks
   }
 
   async store ({ request, response, auth }) {

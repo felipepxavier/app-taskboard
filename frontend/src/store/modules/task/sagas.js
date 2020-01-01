@@ -5,7 +5,7 @@ import api from '~/services/api';
 import { createTaskSuccess, createFailure } from './actions';
 
 export function* createTask({ payload }) {
-  console.log(payload.data);
+  //console.log(payload.data);
   try {
     const {
       title,
@@ -28,7 +28,7 @@ export function* createTask({ payload }) {
     toast.success('Tarefa criada com sucesso!');
 
     const task = response.data;
-    console.log(task);
+    //console.log(task);
 
      yield put(createTaskSuccess(task));
 

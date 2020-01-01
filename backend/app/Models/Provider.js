@@ -24,7 +24,7 @@ class Provider extends Model {
   }
 
   file () {/**add */
-    return this.hasOne('App/Models/File')
+    return this.belongsTo('App/Models/File')
   }
 }
 

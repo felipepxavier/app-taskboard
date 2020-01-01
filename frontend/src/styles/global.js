@@ -20,9 +20,7 @@ export default createGlobalStyle`
     outline: 0;
   }
 
-  html, body, #root {
-    height: 100%;
-  }
+
 
   body {
     background: #0E1E2B url(${background}) no-repeat center bottom;
