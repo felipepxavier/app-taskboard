@@ -34,6 +34,7 @@ export const Container = styled.div`
 
   .btn-action{
     width: 50px;
+    background-color: #d6d5d5;
   }
 
   .btn-action td {
@@ -59,7 +60,6 @@ export const Container = styled.div`
   .container td:nth-child(4),
   .container th:nth-child(4) { display: none; }
   }
-
 
   th h1 {
 	  font-weight: bold;
@@ -90,6 +90,10 @@ export const Task = styled.tr`
 
   &:hover td:first-child{
     border-left: 7px solid #e84b4b;
+  }
+
+  &:hover .btn-action{
+    background-color: #ffffff;
   }
 
   .avatar-prov img{

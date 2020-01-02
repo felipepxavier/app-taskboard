@@ -13,18 +13,17 @@ import { Tooltipped } from 'react-md';
 export default function Dashboard() {
 
   const [task, setTask] = useState([]);
+  const newTask = useSelector(state => state.task.taskCurrent);
 
   useEffect(() => {
     async function loadTask() {
       const response = await api.get('tasks');
       const data = response.data;
-      // console.log(data)
-
       setTask(data);
-
     }
     loadTask();
-  }, [task]);
+    console.log('executando ainda --" ');
+  }, [newTask]);
 
   return (
 
@@ -40,7 +39,9 @@ export default function Dashboard() {
             <th><h1>Entrega</h1></th>
           </tr>
         </thead>
-      { task.map(task => (
+      {
+
+      task.map(task => (
 
         <tbody key={task.id}>
           <Task>

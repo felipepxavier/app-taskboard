@@ -28,6 +28,7 @@ export function* createTask({ payload }) {
     toast.success('Tarefa criada com sucesso!');
 
     const task = response.data;
+
     //console.log(task);
 
      yield put(createTaskSuccess(task));
