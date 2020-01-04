@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 
-import TaskDialog from './TaskDialog';
-import ButtonAction from './ButtonAction';
+import TaskModal from './TaskModal';
 
 import api from '~/services/api';
 
-import { Container, Task } from './styles';
-import { Tooltipped } from 'react-md';
+import { Container } from './styles';
 
+import TableRow from './TableRow';
 
 export default function Dashboard() {
 
@@ -25,10 +24,18 @@ export default function Dashboard() {
     console.log('executando ainda --" ');
   }, [newTask]);
 
+  function taskRow() {
+    return task.map(( task, i ) => {
+      return(
+        <TableRow obj={task} key={i} />
+      )
+    })
+  };
+
   return (
 
     <Container>
-      <TaskDialog />
+      <TaskModal />
     <table className="container">
         <thead>
           <tr>
@@ -39,43 +46,42 @@ export default function Dashboard() {
             <th><h1>Entrega</h1></th>
           </tr>
         </thead>
-      {
 
-      task.map(task => (
 
-        <tbody key={task.id}>
-          <Task>
+        <tbody>
+        {taskRow()
+        /* //   <Task>
 
-                <td>{task.title}</td>
-                <Tooltipped
-                    label={task.provider.name}
-                    position="top"
-                    setPosition
-                  >
-                <td className="avatar-prov">{
-                    <img
-                      src={
-                        task.provider.file.url ||
-                        'https://api.adorable.io/avatars/51/abott@adorable.png'
-                      }
-                      alt="Foto perfil"
-                    />
-                }</td>
-                </Tooltipped>
-                <td>{task.status}</td>
-                <td className={(
-                  task.priorityValue === 'Baixa') ?
-                  'baixa' :
-                  (task.priorityValue === 'Alta') ?
-                  'alta' :
-                  (task.priorityValue === 'Média') ?
-                  'media' :''}>{task.priorityValue}</td>
-                <td>{task.deliveryDate}</td>
-                <td className="btn-action"><ButtonAction /></td>
+        //         <td>{task.title}</td>
+        //         <Tooltipped
+        //             label={task.provider.name}
+        //             position="top"
+        //             setPosition
+        //           >
+        //         <td className="avatar-prov">{
+        //             <img
+        //               src={
+        //                 task.provider.file.url ||
+        //                 'https://api.adorable.io/avatars/51/abott@adorable.png'
+        //               }
+        //               alt="Foto perfil"
+        //             />
+        //         }</td>
+        //         </Tooltipped>
+        //         <td>{task.status}</td>
+        //         <td className={(
+        //           task.priorityValue === 'Baixa') ?
+        //           'baixa' :
+        //           (task.priorityValue === 'Alta') ?
+        //           'alta' :
+        //           (task.priorityValue === 'Média') ?
+        //           'media' :''}>{task.priorityValue}</td>
+        //         <td>{task.deliveryDate}</td>
+        //         <td className="btn-action"><ButtonAction /></td>
 
-            </Task>
+        //     </Task> */}
         </tbody>
-        ))}
+
     </table>
 
     </Container>

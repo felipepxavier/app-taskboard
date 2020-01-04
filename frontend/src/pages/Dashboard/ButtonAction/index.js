@@ -1,16 +1,14 @@
 import React from 'react';
 import { MenuButtonColumn, SVGIcon } from 'react-md';
 
-import { MdMoreVert } from 'react-icons/md';
+import {Link} from 'react-router-dom';
 
-// import info from 'icons/info_outline.svg';
-// import download from 'icons/file_download.svg';
-// import duplicate from 'icons/content_copy.svg';
-// // import deleteIcon from 'icons/delete.svg';
-import more from '~/assets/icons/more-vert.svg';
+import { MdMoreVert } from 'react-icons/md';
 
 const menuItems = [{
   // leftIcon: <SVGIcon use={info.url} />,
+  component: Link,
+  to: '/edit-task/:id',
   primaryText: 'Editar',
 }, { divider: true }, {
   // leftIcon: <SVGIcon use={deleteIcon.url} className="md-text--error" />,
@@ -18,7 +16,11 @@ const menuItems = [{
 }];
 
 const ButtonAction = props => (
-  <MenuButtonColumn {...props} icon menuItems={menuItems} listClassName="tables__with-menus__kebab-list">
+  <MenuButtonColumn
+    icon
+    menuItems={menuItems}
+    listClassName="tables__with-menus__kebab-list"
+  >
     <MdMoreVert />
   </MenuButtonColumn>
 );
