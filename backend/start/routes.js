@@ -4,6 +4,7 @@ const Route = use('Route')
 
 Route.post('tasks', 'TaskController.store').middleware(['auth'])
 Route.get('tasks', 'TaskController.index').middleware(['auth'])
+Route.get('tasks/:id', 'TaskController.show').middleware(['auth'])
 
 Route.post('users', 'UserController.store').validator('User')
 Route.put('users', 'UserController.update').validator('Profile').middleware(['auth'])

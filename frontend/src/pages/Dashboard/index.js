@@ -47,39 +47,8 @@ export default function Dashboard() {
           </tr>
         </thead>
 
-
         <tbody>
-        {taskRow()
-        /* //   <Task>
-
-        //         <td>{task.title}</td>
-        //         <Tooltipped
-        //             label={task.provider.name}
-        //             position="top"
-        //             setPosition
-        //           >
-        //         <td className="avatar-prov">{
-        //             <img
-        //               src={
-        //                 task.provider.file.url ||
-        //                 'https://api.adorable.io/avatars/51/abott@adorable.png'
-        //               }
-        //               alt="Foto perfil"
-        //             />
-        //         }</td>
-        //         </Tooltipped>
-        //         <td>{task.status}</td>
-        //         <td className={(
-        //           task.priorityValue === 'Baixa') ?
-        //           'baixa' :
-        //           (task.priorityValue === 'Alta') ?
-        //           'alta' :
-        //           (task.priorityValue === 'Média') ?
-        //           'media' :''}>{task.priorityValue}</td>
-        //         <td>{task.deliveryDate}</td>
-        //         <td className="btn-action"><ButtonAction /></td>
-
-        //     </Task> */}
+        {taskRow()}
         </tbody>
 
     </table>

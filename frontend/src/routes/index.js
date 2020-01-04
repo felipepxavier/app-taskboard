@@ -1,27 +1,67 @@
-import React from 'react';
-import { Switch } from 'react-router-dom';
+import React, {Component, useEffect} from 'react';
+import { Switch, withRouter } from 'react-router-dom';
 import Route from './Route';
 
 import SignIn from '../pages/SignIn';
 import Forgot from '../pages/Forgot';
 
 import Dashboard from '../pages/Dashboard';
-import EditTask from '../pages/Dashboard/EditTask';
+import TaskModalEdit from '../pages/Dashboard/TaskModalEdit';
 
 import Profile from '../pages/Profile';
 
-export default function Routes() {
+class Routes extends Component  {
+
+  constructor(props) {
+    super(props);
+    this.previousLocation = this.props.location;
+  }
+
+  componentWillUpdate() {
+    let { location } = this.props;
+
+    if (!(location.state && location.state.modal)) {
+      this.previousLocation = location;
+    }
+  }
+
+
+  render() {
+    const { previousLocation } = this.props;
+    const { location } = this.props;
+
+    console.log(previousLocation);
+    const isModal =
+      location.state &&
+      location.state.modal &&
+      this.previousLocation !== location;
+
+    console.log(isModal);
+
+
   return (
-    <Switch>
+    <>
+    <Switch location={isModal ? this.previousLocation : location}>
       <Route path="/" exact component={SignIn} />
       <Route path="/forgot" component={Forgot} />
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
-      <Route path='/edit-task/:id' component={EditTask} isPrivate />
+      <Route path='/modal/:id' exact component={TaskModalEdit} isPrivate />
 
       <Route path="/profile" component={Profile} isPrivate />
 
       <Route path="/" component={() => <h1>Error 404</h1>} />
     </Switch>
+
+      {isModal
+        ? <Route exact path="/modal/:id" isPrivate>
+            <TaskModalEdit isModal />
+          </Route>
+        : null
+      }
+  </>
   );
 }
+}
+
+export default withRouter(Routes);
