@@ -60,7 +60,7 @@ function TaskModalEdit(props){
       setDescription(data.description)
       setPriority(data.priorityValue)
       setDeliveryDate(data.deliveryDate)
-
+      console.log(typeof(priority))
     }
     loadTaskCurrent();
 
@@ -92,6 +92,20 @@ function TaskModalEdit(props){
     setPriority(priority);
   }
 
+  const actions = [{
+    id: 'dialog-cancel',
+    secondary: true,
+    children: 'Cancelar',
+    onClick: hide,
+  }, {
+    id: 'dialog-ok',
+    primary: true,
+    children: 'Atualizar',
+    type: 'submit',
+  }];
+
+  const priorityWrapper = { value: priority, color: '#e6d76a', label: priority }
+console.log(priorityWrapper)
   const colourOptions = [
     { value: 'Baixa', color: '#e6d76a', label: 'Baixa' },
     { value: 'Média', color: '#e29828', label: 'Media' },
@@ -113,6 +127,7 @@ function TaskModalEdit(props){
             id="modal-task"
             visible={visible}
             onHide={hide}
+            actions={actions}
             aria-labelledby="bar-top"
             defaultVisibleTransitionable={true}
           >
@@ -120,7 +135,7 @@ function TaskModalEdit(props){
             <Toolbar
               fixed
               colored
-              title="Edite"
+              title="Editar tarefa"
               titleId="bar-top"
               className="barTask"
               nav={<Button icon onClick={hide}><MdClear/></Button>}
@@ -155,24 +170,26 @@ function TaskModalEdit(props){
                       ...base,
                       padding: 5,
                       borderRadius: 5,
-                      background: priority.color,
+                      background: `${priority ? (priority.color ? priority.color : '#1992f5') : null }`,
                       color: 'white',
                       display: 'flex' })
                     }}
                     components={{ SingleValue }}
                     options={colourOptions}
-                  />
+                    value= {priority.value ? priority : priorityWrapper}
 
+                  />
+                  {console.log('aquiiii=>'+priority)}
                   <DatePicker
                     required
                     id="delivery-date"
                     label="Data de entrega"
-                    selected={deliveryDate}
                     onChange={(dateString, dateObject, event) => setDeliveryDate(dateString, dateObject, event.target.value)}
                     portal={true}
                     lastChild={true}
                     disableScrollLocking={true}
                     renderNode={renderNode}
+                    defaultValue={deliveryDate}
                   />
 
                   <div className="block-file">
