@@ -30,8 +30,6 @@ export function* createTask({ payload }) {
 
     const task = response.data;
 
-    //console.log(task);
-
      yield put(createTaskSuccess(task));
 
     // history.push('/dashboard');
@@ -52,15 +50,13 @@ export function* updateTask({ payload }) {
 
       const id_current = payload.id_current;
 
-      //const response = await api.get(`tasks/${id_current}`);
-
     const response = yield call(api.put, `tasks/${id_current}`, {
       title,
       description,
       priorityValue,
       deliveryDate,
     });
-    history.push('/')
+    // history.push('/')
 
     toast.success('Tarefa atualizada com sucesso!');
 

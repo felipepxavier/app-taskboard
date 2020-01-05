@@ -1,6 +1,8 @@
 'use strict'
 
 const Task = use('App/Models/Task')
+const Provider = use('App/Models/Provider')
+const File = use('App/Models/File')
 
 
 class TaskController {
@@ -18,14 +20,14 @@ class TaskController {
 
   async store ({ request, response, auth }) {
 
-    const { title, description, priorityValue, deliveryDate, status, provider_id, file_id } = request.only([
+    const { title, description, priorityValue, deliveryDate, status, provider_id } = request.only([
       'title',
       'description',
       'priorityValue',
       'deliveryDate',
       'provider_id',
       'status',
-      'file_id'
+      // 'file_id'
     ])
 
     const user_id = auth.user.id;
@@ -41,8 +43,13 @@ class TaskController {
       // file_id
     }
 
-    //const task = await Task.create({ ...data, project_id: params.projects_id })
-    const task = await Task.create(data)
+    const taskData = await Task.create(data)
+    const { id } = taskData;
+
+    const task = await Task.query()
+      .where('id', id)
+      .with('provider.file')
+      .fetch()
 
     return task
   }
@@ -69,7 +76,13 @@ class TaskController {
 
     await task.save()
 
-    return task
+    const taskProv = await Task.query()
+      .where('id', params.id)
+      .with('provider.file')
+      .fetch()
+
+
+    return taskProv
   }
 
 

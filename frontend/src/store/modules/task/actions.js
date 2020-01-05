@@ -8,7 +8,7 @@ export function createTaskRequest(data) {
 export function updateTaskRequest(id_current, data) {
   return {
     type: '@task/UPDATE_TASK_REQUEST',
-    payload: {id_current, data },
+    payload: { id_current, data },
   };
 }
 

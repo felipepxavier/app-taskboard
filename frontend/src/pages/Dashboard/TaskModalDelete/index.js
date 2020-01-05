@@ -54,8 +54,8 @@ function TaskModalDelete(props){
     try{
       await api.delete(`tasks/${id_current}`);
       setVisible(false);
-      // props.history.goBack()
-      history.push('/')
+      props.history.goBack()
+      // history.push('/')
       toast.success('Tarefa deletada com sucesso!');
     }catch(err) {
       console.log(err)

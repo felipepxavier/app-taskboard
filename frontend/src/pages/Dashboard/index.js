@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useMemo, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 
 import TaskModal from './TaskModal';
@@ -12,7 +12,9 @@ import TableRow from './TableRow';
 export default function Dashboard() {
 
   const [task, setTask] = useState([]);
-  const newTask = useSelector(state => state.task.taskCurrent);
+  const current_task = useSelector(state => state.task.current_task);
+  const editing_task = useSelector(state => state.task.editing_task);
+
 
   useEffect(() => {
     async function loadTask() {
@@ -22,7 +24,8 @@ export default function Dashboard() {
     }
     loadTask();
     console.log('executando ainda --" ');
-  }, [newTask]);
+
+  }, []);
 
   function taskRow() {
     return task.map(( task, i ) => {
@@ -31,6 +34,32 @@ export default function Dashboard() {
       )
     })
   };
+
+  useMemo(() => {
+
+    if (current_task) {
+      const newTask = current_task.find(element => element);
+      const newList = [...task, newTask]
+      setTask(newList)
+    }
+
+    if (editing_task) {
+
+      const newTask = editing_task.find(element => element);
+
+      const tt = task.find(element => newTask.id);
+
+      for( var i = 0; i < task.length; i++){
+        if ( task[i] === tt) {
+          task.splice(i, 1);
+        }
+     }
+
+      const newList = [...task, newTask]
+      setTask(newList)
+    }
+
+  }, [current_task, editing_task]);
 
   return (
 
