@@ -34,7 +34,7 @@ export default function TableRow(props) {
               (props.obj.priorityValue === 'Média') ?
               'media' :''}>{props.obj.priorityValue}</td>
             <td>{props.obj.deliveryDate}</td>
-            <td className="btn-action"><ButtonAction getId={props.obj.id} /></td>
+            <td className="btn-action"><ButtonAction getTitle={props.obj.title} getId={props.obj.id} /></td>
 
         </Task>
 

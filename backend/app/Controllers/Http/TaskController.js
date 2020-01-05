@@ -55,14 +55,14 @@ class TaskController {
 
   async update ({ params, request }) {
     const task = await Task.findOrFail(params.id)
+
     const data = request.only([
       'title',
       'description',
       'priorityValue',
       'deliveryDate',
-      'provider_id',
-      'status',
-      'file_id'
+      // 'provider_id',
+      // 'file_id'
     ])
 
     task.merge(data)

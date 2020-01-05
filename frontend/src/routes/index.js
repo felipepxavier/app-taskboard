@@ -7,6 +7,7 @@ import Forgot from '../pages/Forgot';
 
 import Dashboard from '../pages/Dashboard';
 import TaskModalEdit from '../pages/Dashboard/TaskModalEdit';
+import TaskModalDelete from '../pages/Dashboard/TaskModalDelete';
 
 import Profile from '../pages/Profile';
 
@@ -17,7 +18,7 @@ class Routes extends Component  {
     this.previousLocation = this.props.location;
   }
 
-  componentWillUpdate() {
+  UNSAFE_componentWillUpdate() {
     let { location } = this.props;
 
     if (!(location.state && location.state.modal)) {
@@ -25,19 +26,17 @@ class Routes extends Component  {
     }
   }
 
-
   render() {
     const { previousLocation } = this.props;
     const { location } = this.props;
 
-    console.log(previousLocation);
+    // console.log(previousLocation);
     const isModal =
       location.state &&
       location.state.modal &&
       this.previousLocation !== location;
 
-    console.log(isModal);
-
+    // console.log(isModal);
 
   return (
     <>
@@ -46,7 +45,8 @@ class Routes extends Component  {
       <Route path="/forgot" component={Forgot} />
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
-      <Route path='/modal/:id' exact component={TaskModalEdit} isPrivate />
+      <Route path='/edit-task/:id' exact component={TaskModalEdit} isPrivate />
+      <Route path='/delete-task/:id' exact component={TaskModalDelete} isPrivate />
 
       <Route path="/profile" component={Profile} isPrivate />
 
@@ -54,12 +54,19 @@ class Routes extends Component  {
     </Switch>
 
       {isModal
-        ? <Route exact path="/modal/:id" isPrivate>
+        ? <Route exact path="/edit-task/:id" isPrivate>
             <TaskModalEdit isModal />
           </Route>
         : null
       }
-  </>
+
+      {isModal
+        ? <Route exact path="/delete-task/:id" isPrivate>
+            <TaskModalDelete isModal />
+          </Route>
+        : null
+      }
+    </>
   );
 }
 }

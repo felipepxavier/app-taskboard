@@ -4,17 +4,19 @@ import { withRouter } from 'react-router-dom';
 
 import {Link} from 'react-router-dom';
 
-import { MdMoreVert } from 'react-icons/md';
+import { MdMoreVert, MdDelete, MdModeEdit } from 'react-icons/md';
 
-function menuItems(props){
+function menuItems({getId, getTitle}){
   return(
     [{
-    // leftIcon: <SVGIcon use={info.url} />,
+      leftIcon: <MdModeEdit size={20} />,
       component: Link,
-      to:{ pathname: '/modal/'+props, state: {modal: true }},
+      to:{ pathname: '/edit-task/'+getId, state: {modal: true }},
       primaryText: 'Editar',
     }, { divider: true }, {
-      // leftIcon: <SVGIcon use={deleteIcon.url} className="md-text--error" />,
+      leftIcon: <MdDelete  className="md-text--error" size={20} />,
+      component: Link,
+      to:{ pathname: '/delete-task/'+getId, state: {modal: true, title: getTitle }},
       primaryText: <span className="md-text--error">Deletar</span>,
     }]
   )
@@ -23,7 +25,7 @@ function menuItems(props){
 const ButtonAction = props => (
   <MenuButtonColumn
     icon
-    menuItems={menuItems(props.getId)}
+    menuItems={menuItems(props)}
     listClassName="tables__with-menus__kebab-list"
   >
     <MdMoreVert />

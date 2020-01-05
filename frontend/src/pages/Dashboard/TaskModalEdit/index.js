@@ -25,7 +25,7 @@ import {
 import Select, { components } from 'react-select';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { createTaskRequest } from '~/store/modules/task/actions';
+import { updateTaskRequest } from '~/store/modules/task/actions';
 
 import { Container } from './styles';
 
@@ -41,11 +41,11 @@ function TaskModalEdit(props){
   const [ priority, setPriority ] = useState('');
   const [ deliveryDate, setDeliveryDate ] = useState('');
 
-    console.log(title)
-    console.log(description)
-    console.log(priority)
-    console.log(deliveryDate)
-    console.log(props)
+    // console.log(title)
+    // console.log(description)
+    // console.log(priority)
+    // console.log(deliveryDate)
+    // console.log(props)
 
   const dispatch = useDispatch();
 
@@ -60,7 +60,7 @@ function TaskModalEdit(props){
       setDescription(data.description)
       setPriority(data.priorityValue)
       setDeliveryDate(data.deliveryDate)
-      console.log(typeof(priority))
+      // console.log(typeof(priority))
     }
     loadTaskCurrent();
 
@@ -85,7 +85,7 @@ function TaskModalEdit(props){
       deliveryDate
     }
 
-    dispatch(createTaskRequest(data));
+    dispatch(updateTaskRequest(id_current, data));
   };
 
   const handleChange = (priority) => {

@@ -5,6 +5,13 @@ export function createTaskRequest(data) {
   };
 }
 
+export function updateTaskRequest(id_current, data) {
+  return {
+    type: '@task/UPDATE_TASK_REQUEST',
+    payload: {id_current, data },
+  };
+}
+
 export function createTaskSuccess(task) {
   return {
     type: '@task/CREATE_TASK_SUCCESS',
@@ -12,8 +19,21 @@ export function createTaskSuccess(task) {
   };
 }
 
+export function updateTaskSuccess(task) {
+  return {
+    type: '@task/UPDATE_TASK_SUCCESS',
+    payload: { task },
+  };
+}
+
 export function createFailure() {
   return {
     type: '@task/CREATE_FAILURE',
+  };
+}
+
+export function updateFailure() {
+  return {
+    type: '@task/UPDATE_FAILURE',
   };
 }
