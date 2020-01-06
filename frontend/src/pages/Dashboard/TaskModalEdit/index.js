@@ -105,7 +105,7 @@ function TaskModalEdit(props){
   }];
 
   const priorityWrapper = { value: priority, color: '#e6d76a', label: priority }
-console.log(priorityWrapper)
+// console.log(priorityWrapper)
   const colourOptions = [
     { value: 'Baixa', color: '#e6d76a', label: 'Baixa' },
     { value: 'Média', color: '#e29828', label: 'Media' },
@@ -179,7 +179,7 @@ console.log(priorityWrapper)
                     value= {priority.value ? priority : priorityWrapper}
 
                   />
-                  {console.log('aquiiii=>'+priority)}
+                  {/* {console.log('aquiiii=>'+priority)} */}
                   <DatePicker
                     required
                     id="delivery-date"

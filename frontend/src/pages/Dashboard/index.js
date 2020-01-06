@@ -12,6 +12,7 @@ import TableRow from './TableRow';
 export default function Dashboard() {
 
   const [task, setTask] = useState([]);
+
   const current_task = useSelector(state => state.task.current_task);
   const editing_task = useSelector(state => state.task.editing_task);
   const removing_task = useSelector(state => state.task.removing_task);
@@ -37,8 +38,7 @@ export default function Dashboard() {
 
   useMemo(() => {
 
-    if (current_task) {
-      console.log('entrouu :)');
+    if (current_task){
 
       const newTask = current_task.find(element => element);
       const newList = [...task, newTask]
@@ -46,21 +46,14 @@ export default function Dashboard() {
       setTask(newList)
     }
 
-    if (editing_task) {
-      const newTask = editing_task.find(element => element);
-      const old_task = task.find(element => newTask.id);
-      for( var i = 0; i < task.length; i++){
-        if ( task[i] === old_task) {
-          task.splice(i, 1);
-        }
-      }
+  }, [current_task]);
 
-      const newList = [...task, newTask]
-      setTask(newList)
-    }
 
-    if (removing_task) {
-      const old_task = task.find(element => removing_task);
+  useMemo(() => {
+
+    if (removing_task){
+
+      const old_task = task.find(element => element.id == removing_task);
 
       for( var i = 0; i < task.length; i++){
         if ( task[i] === old_task) {
@@ -71,8 +64,28 @@ export default function Dashboard() {
       const newList = [...task]
       setTask(newList)
     }
+  }, [removing_task]);
 
-  }, [current_task, editing_task, removing_task]);
+
+  useMemo(() => {
+
+  if (editing_task) {
+
+    let newTask = editing_task.find(element => element);
+
+    let old_task = task.find(element => element.id === newTask.id);
+
+    for( var i = 0; i < task.length; i++){
+      if ( task[i] === old_task) {
+        task.splice(i, 1);
+
+        const newList = [...task, newTask];
+        setTask(newList);
+      }
+    }
+  }
+}, [editing_task]);
+
 
   return (
 

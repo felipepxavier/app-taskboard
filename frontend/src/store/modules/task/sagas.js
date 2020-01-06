@@ -63,7 +63,7 @@ export function* updateTask({ payload }) {
 
     yield put(updateTaskSuccess(task));
 
-    // history.push('/dashboard');
+    history.push('/dashboard');
   } catch (err) {
     toast.error('Falha na atualização da tarefa');
     yield put(updateFailure());
