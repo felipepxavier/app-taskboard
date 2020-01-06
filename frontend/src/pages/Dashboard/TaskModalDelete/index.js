@@ -27,8 +27,8 @@ import {
 } from 'react-md';
 
 
-// import { useDispatch, useSelector } from 'react-redux';
-// import { updateTaskRequest } from '~/store/modules/task/actions';
+import { useDispatch } from 'react-redux';
+import { deleteTaskRequest } from '~/store/modules/task/actions';
 
 // import { Container } from './styles';
 
@@ -36,10 +36,11 @@ function TaskModalDelete(props){
 
   const id_current = props.match.params.id;
   const title_current = props.location.state.title;
-  console.log(id_current)
+  // console.log(id_current)
 
   const [ visible, setVisible ] = useState(true);
 
+  const dispatch = useDispatch();
 
   const show = () => {
     setVisible(true);
@@ -51,17 +52,8 @@ function TaskModalDelete(props){
   };
 
   async function handleDelete() {
-    try{
-      await api.delete(`tasks/${id_current}`);
-      setVisible(false);
-      props.history.goBack()
-      // history.push('/')
-      toast.success('Tarefa deletada com sucesso!');
-    }catch(err) {
-      console.log(err)
-      toast.error('falha na remoção');
-    }
-
+    dispatch(deleteTaskRequest(id_current));
+    hide()
   }
 
   const actions = [];

@@ -81,7 +81,6 @@ class TaskController {
       .with('provider.file')
       .fetch()
 
-
     return taskProv
   }
 

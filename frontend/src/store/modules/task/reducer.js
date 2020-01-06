@@ -3,6 +3,7 @@ import produce from 'immer';
 const INITIAL_STATE = {
   current_task: null,
   editing_task: null,
+  removing_task: null,
   loading: false,
 };
 
@@ -20,6 +21,12 @@ export default function task(state = INITIAL_STATE, action) {
       }
       case '@task/UPDATE_TASK_SUCCESS': {
         draft.editing_task = action.payload.task;
+        // draft.loading = false;
+        break;
+      }
+
+      case '@task/DELETE_TASK_SUCCESS': {
+        draft.removing_task = action.payload.task;
         // draft.loading = false;
         break;
       }

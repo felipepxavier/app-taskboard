@@ -15,7 +15,6 @@ import {
   SelectField,
   Toolbar,
   DatePicker,
-  SVGIcon
 } from 'react-md';
 
 import Select, { components } from 'react-select';

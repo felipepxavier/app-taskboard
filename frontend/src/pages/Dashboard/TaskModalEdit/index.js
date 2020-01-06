@@ -84,8 +84,8 @@ function TaskModalEdit(props){
       priorityValue,
       deliveryDate
     }
-
     dispatch(updateTaskRequest(id_current, data));
+    hide()
   };
 
   const handleChange = (priority) => {
