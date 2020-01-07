@@ -7,6 +7,8 @@ import { updateProfileRequest } from '~/store/modules/user/actions';
 
 import AvatarInput from './AvatarInput';
 
+import * as Yup from 'yup';
+
 import { Container } from './styles';
 
 import history from '~/services/history';
@@ -15,6 +17,20 @@ import {
   Button,
   DialogContainer
 } from 'react-md';
+
+const schema = Yup.object().shape({
+
+  email: Yup.string()
+    .required('Informe seu e-mail!'),
+
+  password: Yup.string(),
+    // .min(6, 'No minimo 6 caracteres'),
+  confirmPassword: Yup.string()
+    .when('password', (password, field) =>
+    password ? field.required().oneOf([Yup.ref('password')], "As senhas devem ser iguais" ) : field),
+
+});
+
 
 export default function Profile() {
   const [ visible, setVisible ] = useState(false);
@@ -45,7 +61,7 @@ export default function Profile() {
 
   return (
     <Container>
-      <Form initialData={profile} onSubmit={handleSubmit}>
+      <Form initialData={profile} schema={schema} onSubmit={handleSubmit}>
         <AvatarInput name="file_id" />
 
         <Input name="name" placeholder="Nome completo" />

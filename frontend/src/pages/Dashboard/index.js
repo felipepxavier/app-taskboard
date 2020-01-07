@@ -39,53 +39,40 @@ export default function Dashboard() {
   useMemo(() => {
 
     if (current_task){
-
       const newTask = current_task.find(element => element);
       const newList = [...task, newTask]
-
       setTask(newList)
     }
-
   }, [current_task]);
-
 
   useMemo(() => {
 
     if (removing_task){
-
       const old_task = task.find(element => element.id == removing_task);
-
       for( var i = 0; i < task.length; i++){
         if ( task[i] === old_task) {
           task.splice(i, 1);
         }
       }
-
       const newList = [...task]
       setTask(newList)
     }
   }, [removing_task]);
 
-
   useMemo(() => {
 
   if (editing_task) {
-
     let newTask = editing_task.find(element => element);
-
     let old_task = task.find(element => element.id === newTask.id);
-
     for( var i = 0; i < task.length; i++){
       if ( task[i] === old_task) {
         task.splice(i, 1);
-
         const newList = [...task, newTask];
         setTask(newList);
       }
     }
   }
 }, [editing_task]);
-
 
   return (
 

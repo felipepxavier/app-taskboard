@@ -22,7 +22,14 @@ import Select, { components } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTaskRequest } from '~/store/modules/task/actions';
 
+import * as Yup from 'yup';
+
 import { Container } from './styles';
+
+const schema = Yup.object().shape({
+  title: Yup.string()
+    .required('O titulo é obrigatório'),
+});
 
 export default function TaskModal(){
 
@@ -55,6 +62,7 @@ export default function TaskModal(){
     }
 
     dispatch(createTaskRequest(data));
+    hide()
   };
 
   const handleChange = (priority) => {
@@ -105,6 +113,7 @@ export default function TaskModal(){
             actions={actions}
             onHide={hide}
             aria-labelledby="bar-top"
+            schema={schema}
           >
 
             <Toolbar
@@ -118,12 +127,12 @@ export default function TaskModal(){
 
               <section className="md-toolbar-relative">
 
+
                   <TextField
                     id="event-name"
                     placeholder="Título"
                     value={title}
                     onChange={(val, event) => setTitle(val, event.target.value)}
-                    required
                     paddedBlock
                   />
 
@@ -138,6 +147,7 @@ export default function TaskModal(){
                   />
 
                   <Select
+                    required
                     placeholder="Prioridade"
                     className="selPriority"
                     onChange={handleChange}

@@ -7,7 +7,6 @@ import { updateProfileSuccess, updateProfileFailure } from './actions';
 
 export function* updateProfile({ payload }) {
 
-    console.log(payload.data)
     try {
     const { name, email, file_id, ...rest } = payload.data;
 
@@ -22,7 +21,6 @@ export function* updateProfile({ payload }) {
 
       yield put(updateProfileSuccess(response.data));
   } catch (err) {
-    console.log(err)
     toast.error('Erro ao atualizar o perfil.');
     yield put(updateProfileFailure());
   }

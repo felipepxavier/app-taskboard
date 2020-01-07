@@ -20,14 +20,15 @@ export default createGlobalStyle`
     outline: 0;
   }
 
-  /* html, body, #root {
-    height: 100%;
-  } */
+  html, body, #root {
+    /* min-height: 100vh; */
+  }
 
   body {
     background: #0E1E2B url(${background}) no-repeat center bottom;
     background-size: contain;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
   }
 
   body, input, button {

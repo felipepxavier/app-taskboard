@@ -11,9 +11,7 @@ class Profile {
     return {
       file_id: 'required',
       name: 'required',
-      //email: 'required|email|unique:users',
-      //oldPassword: 'string',
-      //password: 'required|confirmed'
+      email: 'required|email|unique:users,email',
     }
   }
 

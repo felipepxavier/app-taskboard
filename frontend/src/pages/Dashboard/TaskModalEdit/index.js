@@ -189,7 +189,7 @@ function TaskModalEdit(props){
                     lastChild={true}
                     disableScrollLocking={true}
                     renderNode={renderNode}
-                    defaultValue={deliveryDate}
+                    // value={deliveryDate}
                   />
 
                   <div className="block-file">
