@@ -19,10 +19,12 @@ import {
 } from 'react-md';
 
 const schema = Yup.object().shape({
-
+  file_id: Yup.string(),
+  name: Yup.string().required('Informe seu nome'),
   email: Yup.string()
-    .required('Informe seu e-mail!'),
+    .required('Informe seu e-mail'),
 
+  oldPassword: Yup.string(),
   password: Yup.string(),
     // .min(6, 'No minimo 6 caracteres'),
   confirmPassword: Yup.string()
@@ -31,7 +33,6 @@ const schema = Yup.object().shape({
 
 });
 
-
 export default function Profile() {
   const [ visible, setVisible ] = useState(false);
 
@@ -39,6 +40,7 @@ export default function Profile() {
   const dispatch = useDispatch();
 
   function handleSubmit(data) {
+    console.log(data)
     dispatch(updateProfileRequest(data));
   }
 
@@ -64,8 +66,17 @@ export default function Profile() {
       <Form initialData={profile} schema={schema} onSubmit={handleSubmit}>
         <AvatarInput name="file_id" />
 
-        <Input name="name" placeholder="Nome completo" />
-        <Input name="email" type="email" placeholder="Seu endereço de e-mail" />
+        <Input
+          type="text"
+          name="name"
+          placeholder="Nome completo"
+        />
+
+        <Input
+          name="email"
+          type="email"
+          placeholder="Seu endereço de e-mail"
+        />
 
         <hr />
 
@@ -74,7 +85,13 @@ export default function Profile() {
           name="oldPassword"
           placeholder="Sua senha atual"
         />
-        <Input type="password" name="password" placeholder="Nova senha" />
+
+        <Input
+          type="password"
+          name="password"
+          placeholder="Nova senha"
+        />
+
         <Input
           type="password"
           name="confirmPassword"
@@ -83,7 +100,6 @@ export default function Profile() {
 
         <button type="submit">Atualizar perfil</button>
       </Form>
-
 
       <div>
         <Button flat  className="btn-signout" onClick={show}>Sair</Button>

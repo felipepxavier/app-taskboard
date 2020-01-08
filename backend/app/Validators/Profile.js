@@ -9,7 +9,7 @@ class Profile {
 
   get rules () {
     return {
-      file_id: 'required',
+     file_id: 'required',
       name: 'required',
       email: 'required|email|unique:users,email',
     }

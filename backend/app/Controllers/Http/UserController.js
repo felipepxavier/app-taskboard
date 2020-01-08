@@ -20,14 +20,13 @@ class UserController {
   }
 
   async update({ request, response, auth }) {
-
-      const { file_id, name, email, oldPassword, password, confirmPassword } = request.only([
+    try{
+      const { file_id, name, email, oldPassword, password } = request.only([
         'file_id',
         'name',
         'email',
         'oldPassword',
-        'password',
-        'confirmPassword'
+        'password'
       ]);
 
       const userId = auth.user.id;
@@ -35,10 +34,11 @@ class UserController {
       const user = await User.findByOrFail('id', userId)
       const isIqual = await Hash.verify(oldPassword, user.password)
 
+
       if (oldPassword && !isIqual) {
         return response
         .status(400)
-        .json({ error: 'Password does not match' });
+        .json({ error: 'senha anterior inválida' });
       }
 
       const value = {
@@ -51,9 +51,6 @@ class UserController {
       user.merge(value);
       await user.save();
 
-      // const avatarUm = await user.file().fetch();
-      // console.log(avatarUm)
-
       const avatar = await File.query()
       .where('id', file_id)
       .first()
@@ -63,6 +60,11 @@ class UserController {
         email,
         avatar
       }
+    }catch (err) {
+      return response
+        .status(error.status)
+        .send({ erro: { message: 'Dados inválidos.' } })
+    }
   }
 }
 

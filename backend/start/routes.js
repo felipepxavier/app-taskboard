@@ -10,6 +10,7 @@ Route.delete('tasks/:id', 'TaskController.destroy')
 
 Route.post('users', 'UserController.store').validator('User')
 Route.put('users', 'UserController.update').middleware(['auth'])
+// Route.put('users', 'UserController.update').validator('Profile').middleware(['auth'])
 
 Route.post('sessions', 'SessionController.store').validator('Session')
 
