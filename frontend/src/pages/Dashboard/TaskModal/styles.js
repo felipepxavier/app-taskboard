@@ -35,6 +35,11 @@ export const Container = styled.div`
     background-color: #fff;
   }
 
+  .selPriority {
+    border: solid 2px red;
+    border-radius: 5px;
+  }
+
 
 
 

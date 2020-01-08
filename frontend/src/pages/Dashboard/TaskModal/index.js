@@ -22,19 +22,15 @@ import Select, { components } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTaskRequest } from '~/store/modules/task/actions';
 
-import * as Yup from 'yup';
-
 import { Container } from './styles';
-
-const schema = Yup.object().shape({
-  title: Yup.string()
-    .required('O titulo é obrigatório'),
-});
 
 export default function TaskModal(){
 
   const [ visible, setVisible ] = useState(false);
   const [ renderNode, setRenderNode ] = useState(null);
+
+  const [ validDate, setValidDate ] = useState(false);
+  const [ validPriority, setValidPriority] = useState(false);
 
   const [ title, setTitle ] = useState('');
   const [ description, setDescription ] = useState('');
@@ -49,10 +45,26 @@ export default function TaskModal(){
 
   const hide = () => {
     setVisible(false);
+
+    setValidDate(false);
+    setValidPriority(false);
   };
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    if (!priority) {
+      console.log('nao tem prioridade')
+      setValidPriority(true)
+      return
+    }
+
+    if (!deliveryDate) {
+      setValidDate(true)
+      return
+    }
+
     const priorityValue = priority.value;
     const data = {
       title,
@@ -62,7 +74,13 @@ export default function TaskModal(){
     }
 
     dispatch(createTaskRequest(data));
+    setValidDate(false)
+    setValidPriority(false)
     hide()
+    setTitle('')
+    setDescription('')
+    setPriority('')
+    setDeliveryDate('')
   };
 
   const handleChange = (priority) => {
@@ -113,7 +131,6 @@ export default function TaskModal(){
             actions={actions}
             onHide={hide}
             aria-labelledby="bar-top"
-            schema={schema}
           >
 
             <Toolbar
@@ -127,8 +144,9 @@ export default function TaskModal(){
 
               <section className="md-toolbar-relative">
 
-
                   <TextField
+                    required
+                    errorText="Informe o título"
                     id="event-name"
                     placeholder="Título"
                     value={title}
@@ -137,6 +155,8 @@ export default function TaskModal(){
                   />
 
                   <TextField
+                    required
+                    errorText="Informe a descrição"
                     id="event-desc"
                     type="text"
                     placeholder="Descrição"
@@ -147,11 +167,11 @@ export default function TaskModal(){
                   />
 
                   <Select
-                    required
                     placeholder="Prioridade"
-                    className="selPriority"
+                    className={validPriority ? 'selPriority' : null }
+                    // validStyle={validPriority}
                     onChange={handleChange}
-                    styles={{ singleValue: (base) => ({
+                    styles={ { singleValue: (base) => ({
                       ...base,
                       padding: 5,
                       borderRadius: 5,
@@ -165,6 +185,8 @@ export default function TaskModal(){
 
                   <DatePicker
                     required
+                    errorText="Informe a data de entrega"
+                    error={validDate}
                     id="delivery-date"
                     label="Data de entrega"
                     selected={deliveryDate}
