@@ -46,6 +46,11 @@ export default function TaskModal(){
   const hide = () => {
     setVisible(false);
 
+    setTitle('')
+    setDescription('')
+    setPriority('')
+    setDeliveryDate('')
+
     setValidDate(false);
     setValidPriority(false);
   };
@@ -77,10 +82,7 @@ export default function TaskModal(){
     setValidDate(false)
     setValidPriority(false)
     hide()
-    setTitle('')
-    setDescription('')
-    setPriority('')
-    setDeliveryDate('')
+
   };
 
   const handleChange = (priority) => {
@@ -148,7 +150,7 @@ export default function TaskModal(){
                     required
                     errorText="Informe o título"
                     id="event-name"
-                    placeholder="Título"
+                    label="Título"
                     value={title}
                     onChange={(val, event) => setTitle(val, event.target.value)}
                     paddedBlock
@@ -159,11 +161,11 @@ export default function TaskModal(){
                     errorText="Informe a descrição"
                     id="event-desc"
                     type="text"
-                    placeholder="Descrição"
+                    label="Descrição"
                     value={description}
                     onChange={(val, event) => setDescription(val, event.target.value)}
                     paddedBlock
-                    rows={4}
+                    rows={3}
                   />
 
                   <Select

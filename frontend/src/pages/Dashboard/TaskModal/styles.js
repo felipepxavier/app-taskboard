@@ -36,9 +36,21 @@ export const Container = styled.div`
   }
 
   .selPriority {
-    border: solid 2px red;
-    border-radius: 5px;
+    border: solid 2px #e84b4b;
+    box-shadow: none;
+    border-radius: 4px;
   }
+
+  .css-1pahdxg-control {
+    border-color: #cccccc!important;
+    box-shadow: none!important;
+  }
+
+  .selPriority .css-yk16xz-control, .selPriority .css-1pahdxg-control {
+    border-color:transparent!important;
+  }
+
+
 
 
 
