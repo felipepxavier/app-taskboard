@@ -27,6 +27,9 @@ import Select, { components } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTaskRequest } from '~/store/modules/task/actions';
 
+import { parseISO, isAfter, parse, setHours } from 'date-fns';
+import { format } from 'date-fns-tz';
+
 import { Container } from './styles';
 
 function TaskModalEdit(props){
@@ -41,16 +44,9 @@ function TaskModalEdit(props){
   const [ priority, setPriority ] = useState('');
   const [ deliveryDate, setDeliveryDate ] = useState('');
 
-    // console.log(title)
-    // console.log(description)
-    // console.log(priority)
-    // console.log(deliveryDate)
-    // console.log(props)
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-
 
     async function loadTaskCurrent() {
       const response = await api.get(`tasks/${id_current}`);
@@ -59,8 +55,11 @@ function TaskModalEdit(props){
       setTitle(data.title)
       setDescription(data.description)
       setPriority(data.priorityValue)
-      setDeliveryDate(data.deliveryDate)
-      // console.log(typeof(priority))
+
+      const parsedDate = setHours(parse(data.deliveryDate, 'dd/MM/yyyy', new Date()), 18)
+
+      setDeliveryDate(parsedDate)
+
     }
     loadTaskCurrent();
 
@@ -179,7 +178,7 @@ function TaskModalEdit(props){
                     value= {priority.value ? priority : priorityWrapper}
 
                   />
-                  {/* {console.log('aquiiii=>'+priority)} */}
+
                   <DatePicker
                     required
                     id="delivery-date"
@@ -189,7 +188,7 @@ function TaskModalEdit(props){
                     lastChild={true}
                     disableScrollLocking={true}
                     renderNode={renderNode}
-                    // value={deliveryDate}
+                    value={deliveryDate}
                   />
 
                   <div className="block-file">

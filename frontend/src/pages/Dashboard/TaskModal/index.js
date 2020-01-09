@@ -55,7 +55,6 @@ export default function TaskModal(){
     setValidPriority(false);
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -82,7 +81,6 @@ export default function TaskModal(){
     setValidDate(false)
     setValidPriority(false)
     hide()
-
   };
 
   const handleChange = (priority) => {

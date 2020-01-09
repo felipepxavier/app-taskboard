@@ -35,15 +35,15 @@ export const Container = styled.div`
     background-color: #fff;
   }
 
+  .css-1pahdxg-control {
+    border-color: #cccccc!important;
+    box-shadow: none!important;
+  }
+
   .selPriority {
     border: solid 2px #e84b4b;
     box-shadow: none;
     border-radius: 4px;
-  }
-
-  .css-1pahdxg-control {
-    border-color: #cccccc!important;
-    box-shadow: none!important;
   }
 
   .selPriority .css-yk16xz-control, .selPriority .css-1pahdxg-control {
