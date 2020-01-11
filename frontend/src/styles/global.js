@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import background from '../assets/images/background.svg';
 
+import 'react-circular-progressbar/dist/styles.css';
+
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
@@ -21,13 +23,14 @@ export default createGlobalStyle`
   }
 
   html, body, #root {
-    /* min-height: 100vh; */
+    /* height: 100%; */
   }
 
   body {
     background: #0E1E2B url(${background}) no-repeat center bottom;
     background-size: contain;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     min-height: 100vh;
   }
 

@@ -28,7 +28,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateTaskRequest } from '~/store/modules/task/actions';
 
 import { parseISO, isAfter, parse, setHours } from 'date-fns';
-import { format } from 'date-fns-tz';
 
 import { Container } from './styles';
 

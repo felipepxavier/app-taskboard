@@ -22,7 +22,10 @@ import Select, { components } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTaskRequest } from '~/store/modules/task/actions';
 
-import { Container } from './styles';
+import { Container, Content } from './styles';
+
+import Upload from '~/components/Upload';
+import FileList from '~/components/FileList';
 
 export default function TaskModal(){
 
@@ -36,6 +39,8 @@ export default function TaskModal(){
   const [ description, setDescription ] = useState('');
   const [ priority, setPriority ] = useState('');
   const [ deliveryDate, setDeliveryDate ] = useState('');
+
+  const [ uploadedFiles, setUploadedFiles ] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -85,6 +90,10 @@ export default function TaskModal(){
 
   const handleChange = (priority) => {
     setPriority(priority);
+  }
+
+  function handleUpload(files) {
+    console.log(files)
   }
 
   const actions = [{
@@ -142,48 +151,38 @@ export default function TaskModal(){
               nav={<Button icon onClick={hide}><MdClear/></Button>}
             />
 
-              <section className="md-toolbar-relative">
+              <section className="md-toolbar-relative content-task">
 
+                <div className="d-flex-column part-one">
                   <TextField
-                    required
-                    errorText="Informe o título"
-                    id="event-name"
-                    label="Título"
-                    value={title}
-                    onChange={(val, event) => setTitle(val, event.target.value)}
-                    paddedBlock
-                  />
-
-                  <TextField
-                    required
-                    errorText="Informe a descrição"
-                    id="event-desc"
-                    type="text"
-                    label="Descrição"
-                    value={description}
-                    onChange={(val, event) => setDescription(val, event.target.value)}
-                    paddedBlock
-                    rows={3}
-                  />
+                      required
+                      errorText="Informe o título"
+                      id="event-name"
+                      label="Título"
+                      value={title}
+                      onChange={(val, event) => setTitle(val, event.target.value)}
+                      paddedBlock
+                    />
 
                   <Select
-                    placeholder="Prioridade"
-                    className={validPriority ? 'selPriority' : null }
-                    // validStyle={validPriority}
-                    onChange={handleChange}
-                    styles={ { singleValue: (base) => ({
-                      ...base,
-                      padding: 5,
-                      borderRadius: 5,
-                      background: priority.color,
-                      color: 'white',
-                      display: 'flex' })
-                    }}
-                    components={{ SingleValue }}
-                    options={colourOptions}
-                  />
+                      id="selectPri"
+                      placeholder="Prioridade"
+                      className={validPriority ? 'selPriority' : null }
+                      onChange={handleChange}
+                      styles={ { singleValue: (base) => ({
+                        ...base,
+                        padding: 5,
+                        borderRadius: 5,
+                        background: priority.color,
+                        color: 'white',
+                        display: 'flex' })
+                      }}
+                      components={{ SingleValue }}
+                      options={colourOptions}
+                    />
 
                   <DatePicker
+                    className="content-date"
                     required
                     errorText="Informe a data de entrega"
                     error={validDate}
@@ -196,18 +195,29 @@ export default function TaskModal(){
                     disableScrollLocking={true}
                     renderNode={renderNode}
                   />
+                </div>
+
+                <div className="d-flex-column">
+                  <TextField
+                      required
+                      errorText="Informe a descrição"
+                      id="event-desc"
+                      type="text"
+                      label="Descrição"
+                      value={description}
+                      onChange={(val, event) => setDescription(val, event.target.value)}
+                      paddedBlock
+                      rows={3}
+                    />
 
                   <div className="block-file">
-                    <p>Insira uma imagem: (opcional)</p>
-                    <FileInput
-                      id="image-input-1"
-                      accept="image/*"
-                      name="images"
-                      label="Inserir imagem"
-                      primary
-                      icon={<MdFileUpload />}
-                    />
+                      <p>Insira uma imagem: (opcional)</p>
+                      <Content>
+                        <Upload onUpload={handleUpload} />
+                        <FileList />
+                      </Content>
                   </div>
+                </div>
 
               </section>
 
