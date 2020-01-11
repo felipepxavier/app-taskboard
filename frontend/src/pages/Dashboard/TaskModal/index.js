@@ -1,5 +1,8 @@
 import React, { PureComponent, useState, ElementConfig } from 'react';
 
+import { uniqueId } from 'lodash';
+import filesize from 'filesize';
+
 import PropTypes from 'prop-types'
 
 import { Form, Input } from '@rocketseat/unform';
@@ -93,7 +96,25 @@ export default function TaskModal(){
   }
 
   function handleUpload(files) {
-    console.log(files)
+    const NewUploadedFiles = files.map(file => ({
+      file,
+      id: uniqueId(),
+      name: file.name,
+      readableSize: filesize(file.size),
+      preview: URL.createObjectURL(file),
+      progress: 0,
+      uploaded: false,
+      error: false,
+      url: null,
+    }))
+
+    setUploadedFiles(NewUploadedFiles.concat(uploadedFiles));
+
+    NewUploadedFiles.forEach(processUpload)
+  };
+
+  const processUpload = (uploadedFile) => {
+
   }
 
   const actions = [{
@@ -166,7 +187,7 @@ export default function TaskModal(){
 
                   <Select
                       id="selectPri"
-                      placeholder="Prioridade"
+                      placeholder="Prioridade*"
                       className={validPriority ? 'selPriority' : null }
                       onChange={handleChange}
                       styles={ { singleValue: (base) => ({
@@ -214,7 +235,9 @@ export default function TaskModal(){
                       <p>Insira uma imagem: (opcional)</p>
                       <Content>
                         <Upload onUpload={handleUpload} />
-                        <FileList />
+                        { !!uploadedFiles.length && (
+                          <FileList files={uploadedFiles} />
+                        ) }
                       </Content>
                   </div>
                 </div>
