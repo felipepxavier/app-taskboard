@@ -23,8 +23,8 @@ export const DropContainer = styled.div.attrs({
 
 const messageColors = {
   default: '#999',
-  error: '#e57878',
-  success: '#78e5d5',
+  error: '#e84b4b',
+  success: '#37f3d9',
 };
 
 export const UploadMessage = styled.p`

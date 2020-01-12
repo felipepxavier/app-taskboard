@@ -4,37 +4,41 @@ import { MdCheckCircle, MdError, MdLink } from 'react-icons/md';
 
 import { Container, FileInfo, Preview } from './styles';
 
-const FileList = ({ files }) => (
+const FileList = ({ files, onDelete }) => (
   <Container>
-    {files.map( uploadedFile =>(
+    {files.map( uploadedFile => (
       <li key={uploadedFile.id}>
         <FileInfo>
           <Preview src={uploadedFile.preview} />
           <div>
             <strong>{uploadedFile.name}</strong>
-            <span>{uploadedFile.readableSize}{" "}
-            { !!uploadedFile.url && (
-               <button onClick={() => {}}>Excluir</button>
+            <span>
+              {uploadedFile.readableSize}{" "}
+              { !!uploadedFile.url && (
+                <button type="button" onClick={() => onDelete(uploadedFile.id)}>
+                  Excluir
+                </button>
             )}
             </span>
           </div>
         </FileInfo>
 
         <div>
-          {!uploadedFile.uploaded && !uploadedFile.error && (
-            <CircularProgressbar
-              styles={{
-                root: { width: 24 },
-                path: { stroke: '#7159c1' }
-              }}
-              strokeWidth={10}
-              percentage={uploadedFile.progress}
-            />
+          {!uploadedFile.uploaded &&
+            !uploadedFile.error && (
+              <CircularProgressbar
+                styles={{
+                  root: { width: 24 },
+                  path: { stroke: '#7159c1' }
+                }}
+                strokeWidth={10}
+                percentage={uploadedFile.progress}
+              />
           )}
 
           {uploadedFile.url && (
             <a
-              href="https://api.adorable.io/avatars/285/abott@adorable.png"
+              href={uploadedFile.url}
               target="_blank"
               rel="noopener noreferrer"
             >

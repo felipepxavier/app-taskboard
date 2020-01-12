@@ -12,8 +12,8 @@ export const Container = styled.div`
     margin-top: 30px;
 
     input {
-      background: rgba(0, 0, 0, 0.1);
-      border: 0;
+      background: rgba(0, 0, 0, 0.2);
+      border: solid 1px #54616b96;
       border-radius: 4px;
       height: 44px;
       padding: 0 15px;

@@ -25,6 +25,7 @@ export const Container = styled.div`
 
   .barTask {
     background-color: #172f43;
+    box-shadow: none;
   }
 
   .css-1pahdxg-control {
@@ -49,13 +50,44 @@ export const Container = styled.div`
     width: 100%!important;
     max-width: 750px;
     padding: 30px;
-    background-color: #fff;
+    color: #fff;
+    background-color: #0d1821;
+
+     input, div, p, i, hr, label{
+      color: #ccd2d8;
+    }
+  }
+
+
+  .input-text, textarea {
+    background: rgba(23, 47, 67, 0.67);
+    border: solid 1px #54616b96;
+    border-radius: 4px;
+    height: 44px;
+    padding: 0 15px;
+    color: #fff;
+    font-weight: bold;
+    margin: 0 0 10px;
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+  }
+
+  .text-description {
+    padding-top: 12px;
+    height: 100%;
+    font-size: 14px;
   }
 
   .content-task {
     display: flex;
     justify-content: center;
   }
+
+  /* .content-date * {
+    color: #fff!important;
+  } */
 
   .part-one {
     padding-right: 20px;
@@ -70,11 +102,22 @@ export const Container = styled.div`
     width: 200px;
     max-height: 100%;
     margin-bottom: 50px;
+    background-color: #132838;
+
+    > div, > div:hover{
+      border: solid 1px #54616b96;
+    }
+
+    * {
+      background-color: #132838;
+
+    }
   }
 
   .block-file{
     width: 400px;
     padding-top:50px;
+
   }
 
   .d-flex-column{
@@ -92,14 +135,4 @@ export const Container = styled.div`
   /* .md-picker-container.content-date {
     padding: 30px;
   } */
-`;
-
-export const Content = styled.div`
-
-  width: 100%;
-  /* max-width: 200px; */
-  background: #efefef;
-  border-radius: 4px;
-  padding: 20px;
-
 `;
