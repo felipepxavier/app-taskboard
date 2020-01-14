@@ -61,7 +61,7 @@ export const Container = styled.div`
 
   .input-text, textarea {
     background: rgba(23, 47, 67, 0.67);
-    border: solid 1px #54616b96;
+    border: solid 2px #54616b96;
     border-radius: 4px;
     height: 44px;
     padding: 0 15px;
@@ -105,11 +105,12 @@ export const Container = styled.div`
     background-color: #132838;
 
     > div, > div:hover{
-      border: solid 1px #54616b96;
+      border: solid 2px #54616b96;
     }
 
-    * {
+    .css-yk16xz-control, .css-1pahdxg-control, .css-26l3qy-menu {
       background-color: #132838;
+      color: #fff;
 
     }
   }

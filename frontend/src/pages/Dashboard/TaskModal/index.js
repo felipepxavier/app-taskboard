@@ -1,4 +1,4 @@
-import React, { PureComponent, useState, ElementConfig } from 'react';
+import React, { PureComponent, useState, useMemo, ElementConfig } from 'react';
 
 import { uniqueId } from 'lodash';
 import filesize from 'filesize';
@@ -10,8 +10,6 @@ import * as Yup from 'yup';
 import { Form, Input } from '@rocketseat/unform';
 
 import PropTypes from 'prop-types'
-
-// import TextField  from '~/components/TextField';
 
 import { MdClear, MdFileUpload} from 'react-icons/md';
 
@@ -36,18 +34,9 @@ import UploadMain from '~/components/UploadMain';
 
 const schema = Yup.object().shape({
   title: Yup.string().required('Informe o título'),
-  // email: Yup.string()
-  //   .required('Informe seu e-mail'),
-
-  // oldPassword: Yup.string(),
-  // password: Yup.string(),
-  //   // .min(6, 'No minimo 6 caracteres'),
-  // confirmPassword: Yup.string()
-  //   .when('password', (password, field) =>
-  //   password ? field.required().oneOf([Yup.ref('password')], "As senhas devem ser iguais" ) : field),
+  description: Yup.string().required('Informe a descrição da tarefa')
 
 });
-
 
 export default function TaskModal(){
 
@@ -62,7 +51,21 @@ export default function TaskModal(){
   const [ priority, setPriority ] = useState('');
   const [ deliveryDate, setDeliveryDate ] = useState('');
 
+  const [ idsImages, setIdsImages ] = useState([]);
+
   const dispatch = useDispatch();
+
+  const ids_images = useSelector(state => state.task.ids_images);
+
+
+
+  useMemo(() => {
+    if (ids_images){
+      setIdsImages([...idsImages, ids_images]);
+
+      // console.log(idsImages)
+    }
+  }, [ids_images]);
 
   const show = (e) => {
     setVisible(true);
@@ -80,8 +83,10 @@ export default function TaskModal(){
     setValidPriority(false);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const handleSubmit = (d) => {
+
+    setTitle(d.title)
+    setDescription(d.description)
 
     if (!priority) {
       console.log('nao tem prioridade')
@@ -99,10 +104,13 @@ export default function TaskModal(){
       title,
       description,
       priorityValue,
-      deliveryDate
+      deliveryDate,
+      idsImages
     }
+    console.log(data)
 
     dispatch(createTaskRequest(data));
+
     setValidDate(false)
     setValidPriority(false)
     hide()
@@ -111,7 +119,6 @@ export default function TaskModal(){
   const handleChange = (priority) => {
     setPriority(priority);
   }
-
 
   const actions = [{
     id: 'dialog-cancel',
@@ -172,25 +179,12 @@ export default function TaskModal(){
 
                 <div className="d-flex-column part-one">
 
-                  {/* <TextField
-                      required
-                      errorText="Informe o título"
-                      id="event-name"
-                      label="Título"
-                      value={title}
-                      onChange={(val, event) => setTitle(val, event.target.value)}
-                      paddedBlock
-                    /> */}
-
                     <Input
                       className="input-text"
                       name="title"
                       type="text"
                       placeholder="Título"
-                      onChange={(val, event) => setTitle(val, event.target.value)}
-                      value={title}
                     />
-
 
                   <Select
                       id="selectPri"
@@ -230,8 +224,6 @@ export default function TaskModal(){
                       className="text-description"
                       name="description"
                       placeholder="Descrição"
-                      value={description}
-                      onChange={(val, event) => setDescription(val, event.target.value)}
                       multiline
                     />
 

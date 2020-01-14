@@ -1,3 +1,10 @@
+export function getIdsImages(data) {
+  return {
+    type: '@task/GET_IDS_IMAGES',
+    payload: { data },
+  };
+}
+
 export function createTaskRequest(data) {
   return {
     type: '@task/CREATE_TASK_REQUEST',

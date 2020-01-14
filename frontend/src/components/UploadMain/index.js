@@ -9,12 +9,19 @@ import { Content } from "./styles";
 import Upload from "~/components/Upload";
 import FileList from "~/components/FileList";
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getIdsImages } from '~/store/modules/task/actions';
+
 class UploadMain extends Component {
+
   state = {
     uploadedFiles: []
   };
 
   handleUpload = files => {
+
+
     const uploadedFiles = files.map(file => ({
       file,
       id: uniqueId(),
@@ -45,6 +52,8 @@ class UploadMain extends Component {
   };
 
   processUpload = uploadedFile => {
+
+
     const data = new FormData();
 
     data.append("file", uploadedFile.file, uploadedFile.name);
@@ -60,12 +69,12 @@ class UploadMain extends Component {
         }
       })
       .then(response => {
-        console.log(response)
         this.updateFile(uploadedFile.id, {
           uploaded: true,
           id: response.data.id,
           url: response.data.url
         });
+        this.props.getIdsImages(response.data.id); //
       })
       .catch(() => {
         this.updateFile(uploadedFile.id, {
@@ -100,4 +109,10 @@ class UploadMain extends Component {
   }
 }
 
-export default UploadMain;
+// export default UploadMain;
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({getIdsImages}, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(UploadMain)

@@ -12,7 +12,9 @@ export function* createTask({ payload }) {
       title,
       description,
       priorityValue,
-      deliveryDate } = payload.data;
+      deliveryDate,
+      idsImages
+    } = payload.data;
 
       const provider_id = 1;
       const status = 'Pendente';
@@ -22,6 +24,7 @@ export function* createTask({ payload }) {
       description,
       priorityValue,
       deliveryDate,
+      idsImages,
       provider_id,
       status
     });

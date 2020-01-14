@@ -20,17 +20,18 @@ class TaskController {
 
   async store ({ request, response, auth }) {
 
-    const { title, description, priorityValue, deliveryDate, status, provider_id } = request.only([
+    const { title, description, priorityValue, deliveryDate, status, provider_id, idsImages } = request.only([
       'title',
       'description',
       'priorityValue',
       'deliveryDate',
       'provider_id',
       'status',
-      // 'file_id'
+      'idsImages'
     ])
 
     const user_id = auth.user.id;
+    const file_id = "110";
 
     const data = {
       user_id,
