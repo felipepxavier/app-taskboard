@@ -1,24 +1,24 @@
 import React, { PureComponent, useState, useMemo, ElementConfig } from 'react';
 
-import { uniqueId } from 'lodash';
-import filesize from 'filesize';
+// import { uniqueId } from 'lodash';
+// import filesize from 'filesize';
 
-import api from '~/services/api';
+// import api from '~/services/api';
 
 import * as Yup from 'yup';
 
 import { Form, Input } from '@rocketseat/unform';
 
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 import { MdClear, MdFileUpload} from 'react-icons/md';
 
 import {
   Button,
   DialogContainer,
-  Divider,
-  FileInput,
-  SelectField,
+  // Divider,
+  // FileInput,
+  // SelectField,
   Toolbar,
   DatePicker,
 } from 'react-md';
@@ -32,11 +32,11 @@ import { Container } from './styles';
 
 import UploadMain from '~/components/UploadMain';
 
-const schema = Yup.object().shape({
-  title: Yup.string().required('Informe o título'),
-  description: Yup.string().required('Informe a descrição da tarefa')
+// const schema = Yup.object().shape({
+//   title: Yup.string().required('Informe o título'),
+//   description: Yup.string().required('Informe a descrição da tarefa')
 
-});
+// });
 
 export default function TaskModal(){
 
@@ -57,13 +57,9 @@ export default function TaskModal(){
 
   const ids_images = useSelector(state => state.task.ids_images);
 
-
-
   useMemo(() => {
     if (ids_images){
       setIdsImages([...idsImages, ids_images]);
-
-      // console.log(idsImages)
     }
   }, [ids_images]);
 
@@ -85,9 +81,6 @@ export default function TaskModal(){
 
   const handleSubmit = (d) => {
 
-    setTitle(d.title)
-    setDescription(d.description)
-
     if (!priority) {
       console.log('nao tem prioridade')
       setValidPriority(true)
@@ -99,10 +92,14 @@ export default function TaskModal(){
       return
     }
 
+    if (title) {
+      console.log('tem algo')
+    }
+
     const priorityValue = priority.value;
+
     const data = {
-      title,
-      description,
+      ...d,
       priorityValue,
       deliveryDate,
       idsImages
@@ -111,8 +108,6 @@ export default function TaskModal(){
 
     dispatch(createTaskRequest(data));
 
-    setValidDate(false)
-    setValidPriority(false)
     hide()
   };
 
@@ -156,8 +151,8 @@ export default function TaskModal(){
         >
           <i className="material-icons mt-plus">add</i>
         </Button>
-
-        <Form schema={schema} onSubmit={handleSubmit}>
+        {/* schema={schema} */}
+        <Form onSubmit={handleSubmit}>
           <DialogContainer
             id="modal-task"
             visible={visible}
@@ -229,7 +224,7 @@ export default function TaskModal(){
 
                   <div className="block-file">
                       <p>Insira uma imagem: (opcional)</p>
-                      <UploadMain />
+                      {/* <UploadMain /> */}
                   </div>
                 </div>
 
