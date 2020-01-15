@@ -3,7 +3,7 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class AddColumnNameUserSchema extends Schema {
+class NameUserSchema extends Schema {
   up () {
     this.alter('users', (table) => {
       table
@@ -12,10 +12,10 @@ class AddColumnNameUserSchema extends Schema {
   }
 
   down () {
-    this.alter('users', (table) => {
+    this.table('users', (table) => {
       table.dropColumn('name');
-    });
+    })
   }
 }
 
-module.exports = AddColumnNameUserSchema
+module.exports = NameUserSchema

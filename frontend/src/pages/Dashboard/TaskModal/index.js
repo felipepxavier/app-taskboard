@@ -32,11 +32,11 @@ import { Container } from './styles';
 
 import UploadMain from '~/components/UploadMain';
 
-// const schema = Yup.object().shape({
-//   title: Yup.string().required('Informe o título'),
-//   description: Yup.string().required('Informe a descrição da tarefa')
+const schema = Yup.object().shape({
+  title: Yup.string().required('Informe o título'),
+  description: Yup.string().required('Informe a descrição da tarefa')
 
-// });
+});
 
 export default function TaskModal(){
 
@@ -151,8 +151,8 @@ export default function TaskModal(){
         >
           <i className="material-icons mt-plus">add</i>
         </Button>
-        {/* schema={schema} */}
-        <Form onSubmit={handleSubmit}>
+
+        <Form schema={schema} onSubmit={handleSubmit}>
           <DialogContainer
             id="modal-task"
             visible={visible}
@@ -224,7 +224,7 @@ export default function TaskModal(){
 
                   <div className="block-file">
                       <p>Insira uma imagem: (opcional)</p>
-                      {/* <UploadMain /> */}
+                      <UploadMain />
                   </div>
                 </div>
 

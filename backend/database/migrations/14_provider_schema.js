@@ -8,12 +8,12 @@ class ProvidersSchema extends Schema {
     this.create('providers', (table) => {
       table.increments()
       table
-      .integer('file_id')
-      .unsigned()
-      .references('id')
-      .inTable('files')
-      .onUpdate('CASCADE')
-      .onDelete('SET NULL')
+        .integer('file_id')
+        .unsigned()
+        .references('id')
+        .inTable('files')
+        .onUpdate('CASCADE')
+        .onDelete('SET NULL')
       table.string('name')
       table.string('username', 80).notNullable().unique()
       table.string('email', 254).notNullable().unique()

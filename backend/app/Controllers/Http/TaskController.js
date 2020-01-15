@@ -1,7 +1,7 @@
 'use strict'
 
 const Task = use('App/Models/Task')
-const Provider = use('App/Models/Provider')
+const TaskIdImage = use('App/Models/TaskIdImage')
 const File = use('App/Models/File')
 
 
@@ -20,19 +20,21 @@ class TaskController {
 
   async store ({ request, response, auth }) {
 
-    const { title, description, priorityValue, deliveryDate, status, provider_id, idsImages } = request.only([
+    const { title, description, priorityValue, deliveryDate, status, provider_id } = request.only([
       'title',
       'description',
       'priorityValue',
       'deliveryDate',
       'provider_id',
       'status',
-      'idsImages'
     ])
 
-    const user_id = auth.user.id;
-    const file_id = "110";
+    const
 
+    images = request.input('idsImages')
+
+    const user_id = auth.user.id;
+    // const task_id = 2;
     const data = {
       user_id,
       title,
@@ -41,16 +43,20 @@ class TaskController {
       deliveryDate,
       status,
       provider_id,
-      // file_id
     }
 
     const taskData = await Task.create(data)
+
     const { id } = taskData;
 
     const task = await Task.query()
       .where('id', id)
       .with('provider.file')
       .fetch()
+
+
+    await taskData.images().attach(images)
+
 
     return task
   }

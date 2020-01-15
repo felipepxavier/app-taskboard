@@ -7,8 +7,8 @@ class Task extends Model {
   static boot () {
     super.boot()
     /** disparar depois da Task ser criada ou alterada */
-    this.addHook('afterCreate', 'TaskHook.sendNewTaskMail')
-    this.addHook('beforeUpdate', 'TaskHook.sendNewTaskMail')
+    // this.addHook('afterCreate', 'TaskHook.sendNewTaskMail')
+    // this.addHook('beforeUpdate', 'TaskHook.sendNewTaskMail')
   }
 
   provider () {/** a Task pertence a um Provider */
@@ -22,6 +22,10 @@ class Task extends Model {
 
   file () {
     return this.hasMany('App/Models/File')
+  }
+
+  images () {
+    return this.hasMany('App/Models/TaskIdImage','task_id','file_id').pivotTable('task_id_images')
   }
 
 }
