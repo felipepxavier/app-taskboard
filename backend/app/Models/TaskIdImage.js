@@ -5,9 +5,8 @@ const Model = use('Model')
 
 class TaskIdImage extends Model {
 
-
-  file () {
-    return this.hasMany('App/Models/File')
+  image () {
+    return this.hasMany('App/Models/File', 'file_id', 'id');
   }
 
 }

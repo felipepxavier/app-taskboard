@@ -54,9 +54,7 @@ class TaskController {
       .with('provider.file')
       .fetch()
 
-
     await taskData.images().attach(images)
-
 
     return task
   }
@@ -64,7 +62,16 @@ class TaskController {
   async show ({ params }) {
     const task = await Task.findOrFail(params.id)
 
-    return task
+    const { id } = task;
+
+    const imgTask = await TaskIdImage.query()
+      .where('task_id', id)
+      .with('image')
+      .fetch()
+
+    const allData = {task, imgTask}
+
+    return allData
   }
 
   async update ({ params, request }) {
