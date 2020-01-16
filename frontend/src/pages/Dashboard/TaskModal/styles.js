@@ -58,7 +58,6 @@ export const Container = styled.div`
     }
   }
 
-
   .input-text, textarea {
     background: rgba(23, 47, 67, 0.67);
     border: solid 2px #54616b96;
@@ -85,16 +84,10 @@ export const Container = styled.div`
     justify-content: center;
   }
 
-  /* .content-date * {
-    color: #fff!important;
-  } */
-
   .part-one {
     padding-right: 20px;
     margin-right: 20px;
     border-right: 1px solid #ccc;
-
-    /* align-items: flex-start; */
   }
 
   #selectPri {
@@ -124,16 +117,10 @@ export const Container = styled.div`
   .d-flex-column{
     display: flex;
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
   }
 
   .block-flex .md-text-field-container{
     width: 250px;
     margin-right: 50px;
   }
-
-  /* .md-picker-container.content-date {
-    padding: 30px;
-  } */
 `;

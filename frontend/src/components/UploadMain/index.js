@@ -21,7 +21,6 @@ class UploadMain extends Component {
 
   handleUpload = files => {
 
-
     const uploadedFiles = files.map(file => ({
       file,
       id: uniqueId(),
@@ -74,7 +73,7 @@ class UploadMain extends Component {
           id: response.data.id,
           url: response.data.url
         });
-        this.props.getIdsImages(response.data.id); //
+        this.props.getIdsImages(response.data.id);
       })
       .catch(() => {
         this.updateFile(uploadedFile.id, {
@@ -100,6 +99,8 @@ class UploadMain extends Component {
 
     return (
         <Content>
+          {console.log('abaixo')}
+          {console.log(uploadedFiles)}
           <Upload onUpload={this.handleUpload} />
           {!!uploadedFiles.length && (
             <FileList files={uploadedFiles} onDelete={this.handleDelete} />
@@ -108,8 +109,6 @@ class UploadMain extends Component {
     );
   }
 }
-
-// export default UploadMain;
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({getIdsImages}, dispatch)

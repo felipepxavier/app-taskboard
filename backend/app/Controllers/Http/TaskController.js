@@ -29,12 +29,10 @@ class TaskController {
       'status',
     ])
 
-    const
-
-    images = request.input('idsImages')
+    const images = request.input('idsImages')
 
     const user_id = auth.user.id;
-    // const task_id = 2;
+
     const data = {
       user_id,
       title,
@@ -46,7 +44,6 @@ class TaskController {
     }
 
     const taskData = await Task.create(data)
-
     const { id } = taskData;
 
     const task = await Task.query()
@@ -54,7 +51,9 @@ class TaskController {
       .with('provider.file')
       .fetch()
 
-    await taskData.images().attach(images)
+    if (images) {
+      await taskData.images().attach(images)
+    }
 
     return task
   }
@@ -69,13 +68,12 @@ class TaskController {
       .with('image')
       .fetch()
 
-      const imgJson = imgTask.toJSON()
+    const imgJson = imgTask.toJSON()
+    const images = imgJson.map(image=> image.image).flat()
 
-      const images = imgJson.map(image=> image.image).flat()
+    const allData = {task, images}
 
-      const allData = {task, images}
-
-      return allData
+    return allData
   }
 
   async update ({ params, request }) {

@@ -31,6 +31,16 @@ import { parseISO, isAfter, parse, setHours } from 'date-fns';
 
 import { Container } from './styles';
 
+import UploadMain from '~/components/UploadMain';
+
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+  title: Yup.string().required('Informe o título'),
+  description: Yup.string().required('Informe a descrição da tarefa')
+
+});
+
 function TaskModalEdit(props){
 
   const id_current = props.match.params.id;
@@ -38,10 +48,18 @@ function TaskModalEdit(props){
   const [ visible, setVisible ] = useState(true);
   const [ renderNode, setRenderNode ] = useState(null);
 
+  const [ validDate, setValidDate ] = useState(false);
+  const [ validPriority, setValidPriority] = useState(false);
+
   const [ title, setTitle ] = useState('');
   const [ description, setDescription ] = useState('');
   const [ priority, setPriority ] = useState('');
   const [ deliveryDate, setDeliveryDate ] = useState('');
+
+  const initialData = {
+    title: title,
+    description: description,
+  };
 
   const dispatch = useDispatch();
 
@@ -50,12 +68,13 @@ function TaskModalEdit(props){
     async function loadTaskCurrent() {
       const response = await api.get(`tasks/${id_current}`);
       const data = response.data;
+      // console.log(data)
 
-      setTitle(data.title)
-      setDescription(data.description)
-      setPriority(data.priorityValue)
+      setTitle(data.task.title)
+      setDescription(data.task.description)
+      setPriority(data.task.priorityValue)
 
-      const parsedDate = setHours(parse(data.deliveryDate, 'dd/MM/yyyy', new Date()), 18)
+      const parsedDate = setHours(parse(data.task.deliveryDate, 'dd/MM/yyyy', new Date()), 18)
 
       setDeliveryDate(parsedDate)
 
@@ -71,10 +90,29 @@ function TaskModalEdit(props){
   const hide = () => {
     setVisible(false);
     props.history.goBack()
+
+    setValidDate(false);
+    setValidPriority(false);
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
+
+    if (!priority) {
+      console.log('nao tem prioridade')
+      setValidPriority(true)
+      return
+    }
+
+    if (!deliveryDate) {
+      setValidDate(true)
+      return
+    }
+
+    if (title) {
+      console.log('tem algo')
+    }
+
     const priorityValue = priority.value;
     const data = {
       title,
@@ -103,7 +141,7 @@ function TaskModalEdit(props){
   }];
 
   const priorityWrapper = { value: priority, color: '#e6d76a', label: priority }
-// console.log(priorityWrapper)
+
   const colourOptions = [
     { value: 'Baixa', color: '#e6d76a', label: 'Baixa' },
     { value: 'Média', color: '#e29828', label: 'Media' },
@@ -120,7 +158,7 @@ function TaskModalEdit(props){
   return (
       <Container>
 
-        <form onSubmit={handleSubmit}>
+        <Form schema={schema} initialData={initialData} onSubmit={handleSubmit}>
           <DialogContainer
             id="modal-task"
             visible={visible}
@@ -139,49 +177,43 @@ function TaskModalEdit(props){
               nav={<Button icon onClick={hide}><MdClear/></Button>}
             />
 
-              <section className="md-toolbar-relative">
+              <section className="md-toolbar-relative content-task">
 
-                  <TextField
-                    id="event-name"
-                    placeholder="Título"
-                    value={title}
-                    onChange={(val, event) => setTitle(val, event.target.value)}
-                    required
-                    paddedBlock
-                  />
+                <div className="d-flex-column part-one">
 
-                  <TextField
-                    id="event-desc"
-                    type="text"
-                    placeholder="Descrição"
-                    value={description}
-                    onChange={(val, event) => setDescription(val, event.target.value)}
-                    paddedBlock
-                    rows={4}
-                  />
+                    <Input
+                      className="input-text"
+                      name="title"
+                      type="text"
+                      placeholder="Título"
+                    />
 
                   <Select
-                    placeholder="Prioridade"
-                    className="selPriority"
-                    onChange={handleChange}
-                    styles={{ singleValue: (base) => ({
-                      ...base,
-                      padding: 5,
-                      borderRadius: 5,
-                      background: `${priority ? (priority.color ? priority.color : '#1992f5') : null }`,
-                      color: 'white',
-                      display: 'flex' })
-                    }}
-                    components={{ SingleValue }}
-                    options={colourOptions}
-                    value= {priority.value ? priority : priorityWrapper}
-
-                  />
+                      id="selectPri"
+                      placeholder="Prioridade*"
+                      className={validPriority ? 'selPriority' : null }
+                      onChange={handleChange}
+                      styles={ { singleValue: (base) => ({
+                        ...base,
+                        padding: 5,
+                        borderRadius: 5,
+                        background: priority.color,
+                        color: 'white',
+                        display: 'flex' })
+                      }}
+                      components={{ SingleValue }}
+                      options={colourOptions}
+                      value= {priority.value ? priority : priorityWrapper}
+                    />
 
                   <DatePicker
+                    className="content-date"
                     required
+                    errorText="Informe a data de entrega"
+                    error={validDate}
                     id="delivery-date"
                     label="Data de entrega"
+                    selected={deliveryDate}
                     onChange={(dateString, dateObject, event) => setDeliveryDate(dateString, dateObject, event.target.value)}
                     portal={true}
                     lastChild={true}
@@ -189,23 +221,26 @@ function TaskModalEdit(props){
                     renderNode={renderNode}
                     value={deliveryDate}
                   />
+                </div>
+
+                <div className="d-flex-column">
+                    <Input
+                      className="text-description"
+                      name="description"
+                      placeholder="Descrição"
+                      multiline
+                    />
 
                   <div className="block-file">
-                    <p>Insira uma imagem: (opcional)</p>
-                    <FileInput
-                      id="image-input-1"
-                      accept="image/*"
-                      name="images"
-                      label="Inserir imagem"
-                      primary
-                      icon={<MdFileUpload />}
-                    />
+                      <p>Insira uma imagem: (opcional)</p>
+                      <UploadMain />
                   </div>
+                </div>
 
               </section>
 
           </DialogContainer>
-        </form>
+        </Form>
 
 
       </Container>
