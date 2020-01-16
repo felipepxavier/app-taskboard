@@ -69,9 +69,13 @@ class TaskController {
       .with('image')
       .fetch()
 
-    const allData = {task, imgTask}
+      const imgJson = imgTask.toJSON()
 
-    return allData
+      const images = imgJson.map(image=> image.image).flat()
+
+      const allData = {task, images}
+
+      return allData
   }
 
   async update ({ params, request }) {
