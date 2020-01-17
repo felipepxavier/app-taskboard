@@ -13,11 +13,28 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getIdsImages } from '~/store/modules/task/actions';
 
+
 class UploadMain extends Component {
 
   state = {
-    uploadedFiles: []
+    uploadedFiles:[]
   };
+
+  getImg(){
+    setTimeout(() => {
+      const img = this.props.images;
+
+      if (img) {
+        this.setState({
+          uploadedFiles: img
+        });
+      }
+    }, 1000)
+  }
+
+  componentDidMount() {
+    this.getImg();
+  }
 
   handleUpload = files => {
 
@@ -51,7 +68,6 @@ class UploadMain extends Component {
   };
 
   processUpload = uploadedFile => {
-
 
     const data = new FormData();
 
@@ -97,10 +113,14 @@ class UploadMain extends Component {
   render() {
     const { uploadedFiles } = this.state;
 
+
+
     return (
         <Content>
-          {console.log('abaixo')}
-          {console.log(uploadedFiles)}
+          {/* {console.log('abaixo')}
+          {console.log(uploadedFiles)} */}
+          {console.log(this.props.images)}
+
           <Upload onUpload={this.handleUpload} />
           {!!uploadedFiles.length && (
             <FileList files={uploadedFiles} onDelete={this.handleDelete} />

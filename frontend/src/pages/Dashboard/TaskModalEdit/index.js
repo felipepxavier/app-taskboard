@@ -56,6 +56,10 @@ function TaskModalEdit(props){
   const [ priority, setPriority ] = useState('');
   const [ deliveryDate, setDeliveryDate ] = useState('');
 
+  const [ images, setImages ] = useState([]);
+
+  // console.log(images)
+
   const initialData = {
     title: title,
     description: description,
@@ -73,6 +77,8 @@ function TaskModalEdit(props){
       setTitle(data.task.title)
       setDescription(data.task.description)
       setPriority(data.task.priorityValue)
+      setImages(data.images)
+
 
       const parsedDate = setHours(parse(data.task.deliveryDate, 'dd/MM/yyyy', new Date()), 18)
 
@@ -233,7 +239,7 @@ function TaskModalEdit(props){
 
                   <div className="block-file">
                       <p>Insira uma imagem: (opcional)</p>
-                      <UploadMain />
+                      <UploadMain images={images} />
                   </div>
                 </div>
 
