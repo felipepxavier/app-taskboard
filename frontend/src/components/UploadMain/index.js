@@ -9,16 +9,34 @@ import { Content } from "./styles";
 import Upload from "~/components/Upload";
 import FileList from "~/components/FileList";
 
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getIdsImages } from '~/store/modules/task/actions';
 
-
 class UploadMain extends Component {
 
   state = {
-    uploadedFiles:  this.props.images ? this.props.images : []
+    uploadedFiles: []
   };
+
+  getImg(){
+    setTimeout(() => {
+      const img = this.props.images;
+
+      if (img) {
+        this.setState({
+          uploadedFiles: img
+        });
+      }
+    }, 1000)
+  }
+
+  componentDidMount() {
+    this.getImg();
+  }
+
 
   handleUpload = files => {
 
@@ -74,6 +92,7 @@ class UploadMain extends Component {
           url: response.data.url
         });
         this.props.getIdsImages(response.data.id);
+        // console.log(response.data);
       })
       .catch(() => {
         this.updateFile(uploadedFile.id, {
@@ -99,7 +118,10 @@ class UploadMain extends Component {
 
     return (
         <Content>
+          {console.log('this.props.images::')}
           {console.log(this.props.images)}
+          {console.log('uploadedFiles::')}
+          {console.log(uploadedFiles)}
 
           <Upload onUpload={this.handleUpload} />
           {!!uploadedFiles.length && (

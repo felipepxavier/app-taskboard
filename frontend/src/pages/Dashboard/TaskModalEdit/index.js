@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ElementConfig } from 'react';
+import React, { useEffect, useState, useMemo, ElementConfig } from 'react';
 
 import { withRouter } from 'react-router-dom';
 
@@ -58,7 +58,15 @@ function TaskModalEdit(props){
 
   const [ images, setImages ] = useState([]);
 
-  console.log(deliveryDate)
+  const [ idsImages, setIdsImages ] = useState([]);
+
+  const ids_images = useSelector(state => state.task.ids_images);
+
+  useMemo(() => {
+    if (ids_images){
+      setIdsImages([...idsImages, ids_images]);
+    }
+  }, [ids_images]);
 
   const initialData = {
     title: title,
@@ -99,7 +107,6 @@ function TaskModalEdit(props){
     setValidPriority(false);
   };
 
-
    const handleSubmit = (d) => {
 
     if (!priority) {
@@ -116,7 +123,7 @@ function TaskModalEdit(props){
     let formattedDate = deliveryDate;
 
     if(typeof(formattedDate) !== 'string') {
-      console.log('nao é string')
+      // console.log('nao é string')
       formattedDate = format(
         formattedDate,
         "dd/MM/yyyy"
@@ -128,7 +135,8 @@ function TaskModalEdit(props){
     const data = {
       ...d,
       priorityValue,
-      deliveryDate: formattedDate
+      deliveryDate: formattedDate,
+      idsImages
     }
     dispatch(updateTaskRequest(id_current, data));
     hide()

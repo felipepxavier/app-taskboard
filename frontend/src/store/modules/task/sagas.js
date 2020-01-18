@@ -49,7 +49,8 @@ export function* updateTask({ payload }) {
       title,
       description,
       priorityValue,
-      deliveryDate } = payload.data;
+      deliveryDate,
+      idsImages, } = payload.data;
 
       const id_current = payload.id_current;
 
@@ -58,6 +59,7 @@ export function* updateTask({ payload }) {
       description,
       priorityValue,
       deliveryDate,
+      idsImages,
     });
 
     toast.success('Tarefa atualizada com sucesso!');

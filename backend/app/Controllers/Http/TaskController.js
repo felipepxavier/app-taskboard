@@ -88,9 +88,16 @@ class TaskController {
       // 'file_id'
     ])
 
+    const images = request.input('idsImages')
+
     task.merge(data)
 
     await task.save()
+
+    if (images) {
+      console.log(images)
+      await task.images().attach(images)
+    }
 
     const taskProv = await Task.query()
       .where('id', params.id)
