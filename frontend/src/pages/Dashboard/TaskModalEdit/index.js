@@ -27,7 +27,7 @@ import Select, { components } from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTaskRequest } from '~/store/modules/task/actions';
 
-import { parseISO, isAfter, parse, setHours } from 'date-fns';
+import { parseISO, isAfter, parse, setHours, format } from 'date-fns';
 
 import { Container } from './styles';
 
@@ -58,7 +58,7 @@ function TaskModalEdit(props){
 
   const [ images, setImages ] = useState([]);
 
-  // console.log(images)
+  console.log(deliveryDate)
 
   const initialData = {
     title: title,
@@ -72,13 +72,11 @@ function TaskModalEdit(props){
     async function loadTaskCurrent() {
       const response = await api.get(`tasks/${id_current}`);
       const data = response.data;
-      // console.log(data)
 
       setTitle(data.task.title)
       setDescription(data.task.description)
       setPriority(data.task.priorityValue)
       setImages(data.images)
-
 
       const parsedDate = setHours(parse(data.task.deliveryDate, 'dd/MM/yyyy', new Date()), 18)
 
@@ -101,8 +99,8 @@ function TaskModalEdit(props){
     setValidPriority(false);
   };
 
-  const handleSubmit = (event) => {
-    // event.preventDefault()
+
+   const handleSubmit = (d) => {
 
     if (!priority) {
       console.log('nao tem prioridade')
@@ -115,16 +113,22 @@ function TaskModalEdit(props){
       return
     }
 
-    if (title) {
-      console.log('tem algo')
+    let formattedDate = deliveryDate;
+
+    if(typeof(formattedDate) !== 'string') {
+      console.log('nao é string')
+      formattedDate = format(
+        formattedDate,
+        "dd/MM/yyyy"
+      );
+      setDeliveryDate(formattedDate)
     }
 
     const priorityValue = priority.value;
     const data = {
-      title,
-      description,
+      ...d,
       priorityValue,
-      deliveryDate
+      deliveryDate: formattedDate
     }
     dispatch(updateTaskRequest(id_current, data));
     hide()
@@ -213,13 +217,12 @@ function TaskModalEdit(props){
                     />
 
                   <DatePicker
-                    className="content-date"
                     required
+                    id="delivery-date"
+                    className="content-date"
                     errorText="Informe a data de entrega"
                     error={validDate}
-                    id="delivery-date"
                     label="Data de entrega"
-                    selected={deliveryDate}
                     onChange={(dateString, dateObject, event) => setDeliveryDate(dateString, dateObject, event.target.value)}
                     portal={true}
                     lastChild={true}

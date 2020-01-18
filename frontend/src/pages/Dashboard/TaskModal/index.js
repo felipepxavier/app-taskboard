@@ -91,6 +91,8 @@ export default function TaskModal(){
       setValidDate(true)
       return
     }
+    console.log(deliveryDate)
+    console.log(typeof(deliveryDate))
 
     if (title) {
       console.log('tem algo')
