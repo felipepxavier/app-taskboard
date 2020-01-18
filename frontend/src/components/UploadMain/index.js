@@ -37,8 +37,11 @@ class UploadMain extends Component {
     this.getImg();
   }
 
-
   handleUpload = files => {
+
+    // this.setState({
+    //   edit: true
+    // });
 
     const uploadedFiles = files.map(file => ({
       file,
@@ -62,7 +65,7 @@ class UploadMain extends Component {
   updateFile = (id, data) => {
     this.setState({
       uploadedFiles: this.state.uploadedFiles.map(uploadedFile => {
-        return id == uploadedFile.id
+        return id === uploadedFile.id
           ? { ...uploadedFile, ...data }
           : uploadedFile;
       })
@@ -92,7 +95,6 @@ class UploadMain extends Component {
           url: response.data.url
         });
         this.props.getIdsImages(response.data.id);
-        // console.log(response.data);
       })
       .catch(() => {
         this.updateFile(uploadedFile.id, {
@@ -115,6 +117,7 @@ class UploadMain extends Component {
 
   render() {
     const { uploadedFiles } = this.state;
+    const { edit } = this.state;
 
     return (
         <Content>

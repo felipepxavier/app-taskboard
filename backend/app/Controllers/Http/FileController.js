@@ -22,7 +22,7 @@ class FileController {
     try {
       if (!request.file('file')) return
 
-      const upload = request.file('file', { size: '3mb' })
+      const upload = request.file('file', { size: '6mb' })
 
       const fileName = `${Date.now()}.${upload.subtype}`
 

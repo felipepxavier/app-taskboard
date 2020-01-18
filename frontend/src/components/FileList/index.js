@@ -25,14 +25,15 @@ const FileList = ({ files, onDelete }) => (
 
         <div>
           {!uploadedFile.uploaded &&
-            !uploadedFile.error && (
+            !uploadedFile.error &&
+            uploadedFile.preview && (
               <CircularProgressbar
                 styles={{
                   root: { width: 24 },
-                  path: { stroke: '#7159c1' }
+                  path: { stroke: '#e84b4b' }
                 }}
                 strokeWidth={10}
-                percentage={uploadedFile.progress}
+                value={uploadedFile.progress}
               />
           )}
 
@@ -42,11 +43,11 @@ const FileList = ({ files, onDelete }) => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <MdLink style={{ marginRight: 8 }} size={24} color="#222" />
+              <MdLink style={{ marginRight: 8 }} size={24} color="#ffffff" />
             </a>
           )}
 
-          { uploadedFile.uploaded && <MdCheckCircle size={24} color="#78e5d5" /> }
+          { uploadedFile.uploaded && <MdCheckCircle size={24} color="#9f9" /> }
           { uploadedFile.error && <MdError size={24} color="#e57878" /> }
 
         </div>

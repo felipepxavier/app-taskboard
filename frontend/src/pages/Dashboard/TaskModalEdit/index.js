@@ -109,6 +109,8 @@ function TaskModalEdit(props){
 
    const handleSubmit = (d) => {
 
+   setTimeout(() =>{
+
     if (!priority) {
       console.log('nao tem prioridade')
       setValidPriority(true)
@@ -140,6 +142,10 @@ function TaskModalEdit(props){
     }
     dispatch(updateTaskRequest(id_current, data));
     hide()
+
+
+
+   },3000)
   };
 
   const handleChange = (priority) => {
