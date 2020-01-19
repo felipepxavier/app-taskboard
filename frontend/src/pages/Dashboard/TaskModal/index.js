@@ -1,4 +1,4 @@
-import React, { PureComponent, useState, useMemo, ElementConfig } from 'react';
+import React, { PureComponent, useState, useMemo, useEffect, ElementConfig } from 'react';
 
 // import { uniqueId } from 'lodash';
 // import filesize from 'filesize';
@@ -58,13 +58,27 @@ export default function TaskModal(){
   const ids_images = useSelector(state => state.task.ids_images);
 
   useMemo(() => {
+
     if (ids_images){
-      setIdsImages([...idsImages, ids_images]);
+      if(typeof(ids_images) === 'string'){
+        const numberArray = ids_images.split('remove')
+        const numberString = numberArray.find(element => element);
+        const number = parseInt(numberString);
+
+        const newNumbers = idsImages.filter(item => item !== number);
+        setIdsImages(newNumbers)
+      }
+
+      if(typeof(ids_images) === 'number') {
+        setIdsImages([...idsImages, ids_images]);
+      }
     }
+
   }, [ids_images]);
 
   const show = (e) => {
     setVisible(true);
+    setIdsImages([]);
   };
 
   const hide = () => {
@@ -77,6 +91,7 @@ export default function TaskModal(){
 
     setValidDate(false);
     setValidPriority(false);
+    setIdsImages([]);
   };
 
   const handleSubmit = (d) => {
@@ -91,12 +106,6 @@ export default function TaskModal(){
       setValidDate(true)
       return
     }
-    console.log(deliveryDate)
-    console.log(typeof(deliveryDate))
-
-    if (title) {
-      console.log('tem algo')
-    }
 
     const priorityValue = priority.value;
 
@@ -106,10 +115,9 @@ export default function TaskModal(){
       deliveryDate,
       idsImages
     }
-    console.log(data)
 
     dispatch(createTaskRequest(data));
-
+    setIdsImages([]);
     hide()
   };
 

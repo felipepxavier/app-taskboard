@@ -3,6 +3,7 @@
 const Task = use('App/Models/Task')
 const TaskIdImage = use('App/Models/TaskIdImage')
 const File = use('App/Models/File')
+const Database = use('Database')
 
 
 class TaskController {
@@ -70,6 +71,7 @@ class TaskController {
 
     const imgJson = imgTask.toJSON()
     const images = imgJson.map(image=> image.image).flat()
+    // console.log(images)
 
     const allData = {task, images}
 
@@ -95,7 +97,6 @@ class TaskController {
     await task.save()
 
     if (images) {
-      console.log(images)
       await task.images().attach(images)
     }
 
@@ -110,6 +111,11 @@ class TaskController {
 
   async destroy ({ params }) {
     const task = await Task.findOrFail(params.id)
+    const { id } = task;
+
+    await TaskIdImage.query()
+    .where('task_id', id)
+    .delete()
 
     await task.delete()
   }

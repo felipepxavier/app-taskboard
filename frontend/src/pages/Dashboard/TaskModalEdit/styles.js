@@ -77,6 +77,7 @@ export const Container = styled.div`
   #selectPri {
     margin-top: 50px;
     width: 200px;
+    height: 44px;
     max-height: 100%;
     margin-bottom: 50px;
     background-color: #132838;
@@ -88,6 +89,7 @@ export const Container = styled.div`
     .css-yk16xz-control, .css-1pahdxg-control, .css-26l3qy-menu {
       background-color: #132838;
       color: #fff;
+      height: 44px;
 
     }
   }

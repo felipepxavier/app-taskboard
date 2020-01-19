@@ -21,6 +21,14 @@ class UploadMain extends Component {
     uploadedFiles: []
   };
 
+  getImgUnm(){
+
+    this.setState({
+      uploadedFiles: []
+    });
+
+  }
+
   getImg(){
     setTimeout(() => {
       const img = this.props.images;
@@ -30,18 +38,20 @@ class UploadMain extends Component {
           uploadedFiles: img
         });
       }
-    }, 1000)
+
+    }, 2000)
   }
 
   componentDidMount() {
     this.getImg();
   }
 
-  handleUpload = files => {
+  componentWillUnmount() {
+    this.state.uploadedFiles.forEach(file => URL.revokeObjectURL(file.preview));
+    this.getImgUnm();
+  }
 
-    // this.setState({
-    //   edit: true
-    // });
+  handleUpload = files => {
 
     const uploadedFiles = files.map(file => ({
       file,
@@ -104,16 +114,18 @@ class UploadMain extends Component {
   };
 
   handleDelete = async id => {
+    console.log('deletando')
+    console.log(id)
     await api.delete(`files/${id}`);
+
+    this.props.getIdsImages('remove'+id);
 
     this.setState({
       uploadedFiles: this.state.uploadedFiles.filter(file => file.id !== id)
     });
   };
 
-  componentWillUnmount() {
-    this.state.uploadedFiles.forEach(file => URL.revokeObjectURL(file.preview));
-  }
+
 
   render() {
     const { uploadedFiles } = this.state;

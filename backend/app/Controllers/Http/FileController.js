@@ -2,6 +2,8 @@
 
 const File = use('App/Models/File')
 const Helpers = use('Helpers')
+const TaskIdImage = use('App/Models/TaskIdImage')
+
 
 class FileController {
   async show ({ params, response }) {
@@ -51,11 +53,18 @@ class FileController {
 
   async destroy ({ params }) {
     const file = await File.findOrFail(params.id)
+    const { id } = file;
+
+    const taskimg = await TaskIdImage.query()
+    .where('file_id', id)
+    .first()
+
+    if (taskimg) {
+      await taskimg.delete()
+    }
 
     await file.delete()
   }
-
-
 }
 
 module.exports = FileController

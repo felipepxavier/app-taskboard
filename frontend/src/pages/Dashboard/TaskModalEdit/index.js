@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, ElementConfig } from 'react';
+import React, { useEffect, useState, useMemo, useRef, ElementConfig } from 'react';
 
 import { withRouter } from 'react-router-dom';
 
@@ -63,9 +63,22 @@ function TaskModalEdit(props){
   const ids_images = useSelector(state => state.task.ids_images);
 
   useMemo(() => {
+
     if (ids_images){
-      setIdsImages([...idsImages, ids_images]);
+      if(typeof(ids_images) === 'string'){
+        const numberArray = ids_images.split('remove')
+        const numberString = numberArray.find(element => element);
+        const number = parseInt(numberString);
+
+        const newNumbers = idsImages.filter(item => item !== number);
+        setIdsImages(newNumbers)
+      }
+
+      if(typeof(ids_images) === 'number') {
+        setIdsImages([...idsImages, ids_images]);
+      }
     }
+
   }, [ids_images]);
 
   const initialData = {
@@ -85,6 +98,8 @@ function TaskModalEdit(props){
       setDescription(data.task.description)
       setPriority(data.task.priorityValue)
       setImages(data.images)
+      setIdsImages([]);
+
 
       const parsedDate = setHours(parse(data.task.deliveryDate, 'dd/MM/yyyy', new Date()), 18)
 
@@ -108,11 +123,7 @@ function TaskModalEdit(props){
   };
 
    const handleSubmit = (d) => {
-
-   setTimeout(() =>{
-
     if (!priority) {
-      console.log('nao tem prioridade')
       setValidPriority(true)
       return
     }
@@ -122,10 +133,10 @@ function TaskModalEdit(props){
       return
     }
 
-    let formattedDate = deliveryDate;
+    hide()
 
+    let formattedDate = deliveryDate;
     if(typeof(formattedDate) !== 'string') {
-      // console.log('nao é string')
       formattedDate = format(
         formattedDate,
         "dd/MM/yyyy"
@@ -140,12 +151,10 @@ function TaskModalEdit(props){
       deliveryDate: formattedDate,
       idsImages
     }
+    // console.log('dados p/ atualizar: ')
+    // console.log(data)
     dispatch(updateTaskRequest(id_current, data));
-    hide()
-
-
-
-   },3000)
+    setIdsImages([]);
   };
 
   const handleChange = (priority) => {

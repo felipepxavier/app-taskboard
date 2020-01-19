@@ -14,6 +14,7 @@ import Profile from '../pages/Profile';
 class Routes extends Component  {
 
   constructor(props) {
+    console.log(props)
     super(props);
     this.previousLocation = this.props.location;
   }

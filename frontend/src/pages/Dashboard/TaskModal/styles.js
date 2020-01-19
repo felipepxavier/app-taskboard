@@ -9,6 +9,10 @@ export const Container = styled.div`
     padding: 5px;
    }
 
+   .md-divider {
+    background: #ccd2d8;
+   }
+
   i.mt-plus {
     color: white;
     font-size: 50px;
@@ -87,7 +91,7 @@ export const Container = styled.div`
   .part-one {
     padding-right: 20px;
     margin-right: 20px;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #263847;
   }
 
   #selectPri {
@@ -96,6 +100,7 @@ export const Container = styled.div`
     max-height: 100%;
     margin-bottom: 50px;
     background-color: #132838;
+    height: 44px;
 
     > div, > div:hover{
       border: solid 2px #54616b96;
@@ -104,6 +109,7 @@ export const Container = styled.div`
     .css-yk16xz-control, .css-1pahdxg-control, .css-26l3qy-menu {
       background-color: #132838;
       color: #fff;
+      height: 44px;
 
     }
   }

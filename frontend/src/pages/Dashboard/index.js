@@ -78,6 +78,7 @@ export default function Dashboard() {
 
     <Container>
       <TaskModal />
+
     <table className="container">
         <thead>
           <tr>
