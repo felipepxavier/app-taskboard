@@ -226,14 +226,25 @@ function TaskModalEdit(props){
                       placeholder="Prioridade*"
                       className={validPriority ? 'selPriority' : null }
                       onChange={handleChange}
-                      styles={ { singleValue: (base) => ({
+                      styles={
+                        { singleValue: (base) => ({
                         ...base,
                         padding: 5,
                         borderRadius: 5,
-                        background: priority.color,
+                        background: priority.color ? priority.color : '#747c82',
                         color: 'white',
                         display: 'flex' })
                       }}
+                      theme={theme => ({
+                        ...theme,
+                        colors: {
+                          ...theme.colors,
+                          neutral0: '#132838',
+                          primary50:'rgba(0,0,0,0.2)',
+                          primary25: 'rgba(0,0,0,0.2)',
+                          primary: priority.color ? priority.color : '#747c82',
+                        },
+                      })}
                       components={{ SingleValue }}
                       options={colourOptions}
                       value= {priority.value ? priority : priorityWrapper}

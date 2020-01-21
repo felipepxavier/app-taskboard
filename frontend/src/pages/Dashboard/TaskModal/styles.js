@@ -100,7 +100,14 @@ export const Container = styled.div`
     max-height: 100%;
     margin-bottom: 50px;
     background-color: #132838;
-    height: 44px;
+
+    > div {
+      min-height: 44px;
+    }
+
+    * {
+      box-shadow: none!important;
+    }
 
     > div, > div:hover{
       border: solid 2px #54616b96;

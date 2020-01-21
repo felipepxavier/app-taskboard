@@ -14,6 +14,10 @@ export const Container = styled.div`
     font-size: 50px;
   }
 
+  .md-divider {
+    background: #ccd2d8;
+   }
+
   ul#select-field-task-menu-options {
     width: 100%;
 }
@@ -71,26 +75,37 @@ export const Container = styled.div`
   .part-one {
     padding-right: 20px;
     margin-right: 20px;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #263847;
   }
 
   #selectPri {
     margin-top: 50px;
     width: 200px;
-    height: 44px;
     max-height: 100%;
     margin-bottom: 50px;
     background-color: #132838;
+
+    > div {
+      min-height: 44px;
+    }
+
+    * {
+      box-shadow: none!important;
+    }
 
     > div, > div:hover{
       border: solid 2px #54616b96;
     }
 
-    .css-yk16xz-control, .css-1pahdxg-control, .css-26l3qy-menu {
+    .css-yk16xz-control, .css-1pahdxg-control {
       background-color: #132838;
       color: #fff;
       height: 44px;
 
+    }
+
+    .css-26l3qy-menu {
+      background-color: #132838;
     }
   }
 

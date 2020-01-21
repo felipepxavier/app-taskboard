@@ -204,6 +204,16 @@ export default function TaskModal(){
                         color: 'white',
                         display: 'flex' })
                       }}
+                      theme={theme => ({
+                        ...theme,
+                        colors: {
+                          ...theme.colors,
+                          neutral0: '#132838',
+                          primary50:'rgba(0,0,0,0.2)',
+                          primary25: 'rgba(0,0,0,0.2)',
+                          primary: priority.color ? priority.color : '#747c82',
+                        },
+                      })}
                       components={{ SingleValue }}
                       options={colourOptions}
                     />
