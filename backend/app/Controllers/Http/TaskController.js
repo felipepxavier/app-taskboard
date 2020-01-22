@@ -16,6 +16,8 @@ class TaskController {
       .with('provider.file')
       .fetch()
 
+       // .with('images.image')
+
     return tasks
   }
 

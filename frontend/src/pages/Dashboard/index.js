@@ -21,6 +21,7 @@ export default function Dashboard() {
     async function loadTask() {
       const response = await api.get('tasks');
       const data = response.data;
+      console.log(data)
       setTask(data);
     }
     loadTask();

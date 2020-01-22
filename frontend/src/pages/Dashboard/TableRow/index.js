@@ -4,12 +4,14 @@ import { Task } from './styles';
 
 import ButtonAction from '../ButtonAction';
 import { Tooltipped } from 'react-md';
+import PreviewModal from './PreviewModal';
 
 export default function TableRow(props) {
   return (
 
       <Task>
-            <td>{props.obj.title}</td>
+        <td><PreviewModal task={props.obj}/></td>
+
             <Tooltipped
                 label={props.obj.provider.name}
                 position="top"
