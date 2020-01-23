@@ -26,7 +26,6 @@ class UploadMain extends Component {
     this.setState({
       uploadedFiles: []
     });
-
   }
 
   getImg(){
@@ -114,8 +113,8 @@ class UploadMain extends Component {
   };
 
   handleDelete = async id => {
-    console.log('deletando')
-    console.log(id)
+    // console.log('deletando')
+    // console.log(id)
     await api.delete(`files/${id}`);
 
     this.props.getIdsImages('remove'+id);

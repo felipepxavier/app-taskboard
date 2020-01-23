@@ -10,7 +10,7 @@ export default function TableRow(props) {
   return (
 
       <Task>
-        <td><PreviewModal task={props.obj}/></td>
+        <td> <PreviewModal task={props.obj}/> </td>
 
             <Tooltipped
                 label={props.obj.provider.name}

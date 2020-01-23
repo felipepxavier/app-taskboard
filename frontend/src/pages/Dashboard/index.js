@@ -9,19 +9,23 @@ import { Container } from './styles';
 
 import TableRow from './TableRow';
 
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+
 export default function Dashboard() {
 
   const [task, setTask] = useState([]);
+  const [currentSort, setCurrentSort] = useState('up');
 
   const current_task = useSelector(state => state.task.current_task);
   const editing_task = useSelector(state => state.task.editing_task);
   const removing_task = useSelector(state => state.task.removing_task);
 
+  // console.log(editing_task)
   useEffect(() => {
     async function loadTask() {
       const response = await api.get('tasks');
       const data = response.data;
-      console.log(data)
+      // console.log(data)
       setTask(data);
     }
     loadTask();
@@ -29,12 +33,36 @@ export default function Dashboard() {
 
   }, []);
 
+
+  const sortTypes = {
+    up: {
+      mode: <MdKeyboardArrowUp size={28} />,
+      fn: (a, b) => a.id - b.id
+    },
+    down: {
+      mode: <MdKeyboardArrowDown size={28} />,
+      fn: (a, b) => b.id - a.id
+    }
+  };
+
+  const onSortChange = () => {
+		let nextSort;
+		if (currentSort === 'down') nextSort = 'up';
+		else if (currentSort === 'up') nextSort = 'down';
+    setCurrentSort(nextSort);
+	};
+
   function taskRow() {
-    return task.map(( task, i ) => {
-      return(
-        <TableRow obj={task} key={i} />
-      )
-    })
+    return (
+      <>
+        <button className="btn-sort" onClick={onSortChange}>
+        {sortTypes[currentSort].mode}
+        </button>
+        {[...task].sort(sortTypes[currentSort].fn).map(obj => (
+            <TableRow obj={obj} key={obj.id} />
+        ))}
+      </>
+    )
   };
 
   useMemo(() => {
@@ -76,10 +104,8 @@ export default function Dashboard() {
 }, [editing_task]);
 
   return (
-
     <Container>
       <TaskModal />
-
     <table className="container">
         <thead>
           <tr>
@@ -90,7 +116,6 @@ export default function Dashboard() {
             <th><h1>Entrega</h1></th>
           </tr>
         </thead>
-
         <tbody>
         {taskRow()}
         </tbody>

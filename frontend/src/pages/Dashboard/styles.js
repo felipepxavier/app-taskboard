@@ -7,6 +7,12 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
+  .btn-sort {
+    background: transparent;
+    border: none;
+    color: white;
+  }
+
   .container {
 	  text-align: center;
 	  overflow: hidden;
