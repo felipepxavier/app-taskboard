@@ -8,6 +8,13 @@ export const Preview = styled.tr`
       background-color: #e1f0fd;
   }
 
+  .block-images img {
+    margin: 10px;
+    border-radius: 4px;
+    max-width: 100px;
+    max-height: 100%;
+  }
+
   h2#modal-preview-title {
     margin: 10px;
     color: #0e1c28;

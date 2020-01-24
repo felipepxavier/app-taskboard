@@ -14,9 +14,8 @@ class TaskController {
     const tasks = await Task.query()
       .where('user_id', user_id)
       .with('provider.file')
+      .with('images')
       .fetch()
-
-       // .with('images.image')
 
     return tasks
   }
@@ -105,6 +104,7 @@ class TaskController {
     const taskProv = await Task.query()
       .where('id', params.id)
       .with('provider.file')
+      .with('images')
       .fetch()
 
     return taskProv

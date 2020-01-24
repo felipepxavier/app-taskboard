@@ -16,6 +16,7 @@ class PreviewModal extends PureComponent {
   componentDidUpdate(prevProps) {
 
     if (this.props.newTask !== prevProps.newTask) {
+      console.log(this.props.newTask)
       let taskOld = this.state.content;
       let newTask = this.props.newTask.find(element => element);
 
@@ -44,6 +45,8 @@ class PreviewModal extends PureComponent {
 
     const provider = content.provider;
     const provData = {...provider}
+
+    const images = content.images;
 
     const actions = [{
       onClick: this.hide,
@@ -105,6 +108,13 @@ class PreviewModal extends PureComponent {
             </section>
           </section>
           <section className="block-images">
+
+            {
+              images ? images.map(item => {
+                console.log(item);
+                return <img src={item.url} alt=""/>
+              }) : null
+            }
 
           </section>
         </DialogContainer>

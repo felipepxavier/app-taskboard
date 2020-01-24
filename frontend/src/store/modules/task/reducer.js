@@ -13,7 +13,7 @@ export default function task(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@task/GET_IDS_IMAGES': {
         draft.ids_images = action.payload.data;
-        console.log(draft.ids_images)
+        // console.log(draft.ids_images)
         break;
       }
       case '@task/CREATE_TASK_REQUEST': {

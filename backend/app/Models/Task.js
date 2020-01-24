@@ -25,7 +25,7 @@ class Task extends Model {
   }
 
   images () {
-    return this.belongsToMany('App/Models/TaskIdImage','task_id','file_id').pivotTable('task_id_images')
+    return this.belongsToMany('App/Models/File','task_id','file_id').pivotTable('task_id_images')
   }
 
 }
