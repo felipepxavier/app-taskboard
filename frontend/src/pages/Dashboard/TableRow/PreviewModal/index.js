@@ -57,47 +57,56 @@ class PreviewModal extends PureComponent {
         {console.log(content)}
         <Button flat className="preview-task" onClick={this.show}>{content.title}</Button>
         <DialogContainer
-          id="speed-boost"
+          id="modal-preview"
           visible={visible}
           title={content.title}
           onHide={this.hide}
-          aria-describedby="speed-boost-description"
+          aria-describedby="modal-preview-description"
           modal
           actions={actions}
+          className="modal-prev"
         >
-            <div className="prev-description-icon">
-              <MdShortText size={20} />
-              <strong>Descrição: </strong>
-            </div>
+          <section className="block-flex">
+            <section className="block-prev-description">
+              <div className="prev-description-icon">
+                <MdShortText size={20} />
+                <strong>Descrição: </strong>
+              </div>
 
-            <p id="speed-boost-description" className="md-color--secondary-text">
-             {content.description}
-            </p>
+              <p>
+              {content.description}
+              </p>
+            </section>
 
-          <div className="prev-date">
-            <MdAccountBox size={20} />
-            <strong>Proprietário: </strong>
-            <span> {provData.name}</span>
-          </div>
+            <section className="block-prev-data">
+              <div className="prev-icon">
+                <MdAccountBox size={20} />
+                <strong>Proprietário: </strong>
+                <span> {provData.name}</span>
+              </div>
 
-          <div className="prev-date">
-            <MdTrendingUp size={20} />
-            <strong>Status: </strong>
-            <span> {content.status}</span>
-          </div>
+              <div className="prev-icon">
+                <MdTrendingUp size={20} />
+                <strong>Status: </strong>
+                <span> {content.status}</span>
+              </div>
 
-          <div className="prev-date">
-            <MdPriorityHigh size={20} />
-            <strong>Prioridade: </strong>
-            <span> {content.priorityValue}</span>
-          </div>
+              <div className="prev-icon">
+                <MdPriorityHigh size={20} />
+                <strong>Prioridade: </strong>
+                <span> {content.priorityValue}</span>
+              </div>
 
-          <div className="prev-date">
-            <MdDateRange size={20} />
-            <strong>Entrega: </strong>
-            <span> {content.deliveryDate}</span>
-          </div>
+              <div className="prev-icon">
+                <MdDateRange size={20} />
+                <strong>Entrega: </strong>
+                <span> {content.deliveryDate}</span>
+              </div>
+            </section>
+          </section>
+          <section className="block-images">
 
+          </section>
         </DialogContainer>
       </Preview>
     );

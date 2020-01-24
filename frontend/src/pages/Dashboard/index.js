@@ -20,19 +20,17 @@ export default function Dashboard() {
   const editing_task = useSelector(state => state.task.editing_task);
   const removing_task = useSelector(state => state.task.removing_task);
 
-  // console.log(editing_task)
   useEffect(() => {
     async function loadTask() {
       const response = await api.get('tasks');
       const data = response.data;
-      // console.log(data)
+      console.log(data)
       setTask(data);
     }
     loadTask();
-    console.log('executando ainda --" ');
+    // console.log('executando ainda --" ');
 
   }, []);
-
 
   const sortTypes = {
     up: {
