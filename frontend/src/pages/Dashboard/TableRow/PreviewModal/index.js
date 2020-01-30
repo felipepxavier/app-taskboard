@@ -3,7 +3,7 @@ import { Button, DialogContainer } from 'react-md';
 import { Preview } from './styles';
 import { connect } from 'react-redux';
 
-import {MdDateRange, MdPriorityHigh, MdShortText, MdTrendingUp, MdAccountBox} from 'react-icons/md';
+import {MdDateRange, MdPriorityHigh, MdShortText, MdTrendingUp, MdAccountBox, MdAttachment} from 'react-icons/md';
 
 
 class PreviewModal extends PureComponent {
@@ -108,11 +108,15 @@ class PreviewModal extends PureComponent {
             </section>
           </section>
           <section className="block-images">
+              <div>
+                <MdAttachment size={20} />
+                <strong>imagens: </strong>
+              </div>
 
             {
               images ? images.map(item => {
                 console.log(item);
-                return <img src={item.url} alt=""/>
+                return <a target="_blank" href={item.url}><img src={item.url} alt=""/></a>
               }) : null
             }
 

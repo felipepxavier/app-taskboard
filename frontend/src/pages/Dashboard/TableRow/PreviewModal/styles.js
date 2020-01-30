@@ -8,6 +8,22 @@ export const Preview = styled.tr`
       background-color: #e1f0fd;
   }
 
+  .block-images {
+    background-color: rgba(133, 175, 191, 0.28);
+    border-radius: 4px;
+    margin: 10px;
+    padding: 10px;
+
+    > div {
+      display: flex;
+      align-items: flex-end;
+
+      > svg{
+        padding-right: 5px;
+      }
+    }
+  }
+
   .block-images img {
     margin: 10px;
     border-radius: 4px;

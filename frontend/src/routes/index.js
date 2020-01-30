@@ -9,6 +9,8 @@ import Dashboard from '../pages/Dashboard';
 import TaskModalEdit from '../pages/Dashboard/TaskModalEdit';
 import TaskModalDelete from '../pages/Dashboard/TaskModalDelete';
 
+import DashProv from '../pages/DashProv';
+
 import Profile from '../pages/Profile';
 
 class Routes extends Component  {
@@ -48,8 +50,9 @@ class Routes extends Component  {
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path='/edit-task/:id' exact component={TaskModalEdit} isPrivate />
       <Route path='/delete-task/:id' exact component={TaskModalDelete} isPrivate />
-
       <Route path="/profile" component={Profile} isPrivate />
+
+      <Route path="/dash-prov" component={DashProv} isPrivate />
 
       <Route path="/" component={() => <h1>Error 404</h1>} />
     </Switch>
