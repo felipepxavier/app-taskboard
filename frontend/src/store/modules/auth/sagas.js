@@ -17,19 +17,24 @@ export function* signIn({ payload }) {
 
     const { token, user } = response.data;
 
-    /** se nao for um prestador de serviço
-    if (!user.provider) {
-      toast.error('Usuário não é prestador');
-      return;
-    }* */
-
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
 
-    history.push('/dashboard');
+    if (user.provider) {
+      console.log('é provider');
+      history.push('/dash-prov');
+      return
+    }else {
+      console.log('nao é');
+      console.log(user.provider);
+      history.push('/dashboard');
+      return
+    }
+
   } catch (err) {
     toast.error('Falha na autenticação, verifique seus dados.');
+    console.log(err)
     yield put(signFailure());
   }
 }

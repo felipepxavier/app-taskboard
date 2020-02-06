@@ -37,6 +37,26 @@ module.exports = {
 
   /*
   |--------------------------------------------------------------------------
+  | Session
+  |--------------------------------------------------------------------------
+  |
+  | Session authenticator makes use of sessions to authenticate a user.
+  | Session authentication is always persistent.
+  |
+  */
+  session2: {
+    serializer: 'lucid',
+    model: 'App/Models/Provider',
+    scheme: 'jwt',
+    uid: 'email',
+    password: 'password',
+    options: {
+      secret: Env.get('APP_KEY')
+    }
+  },
+
+  /*
+  |--------------------------------------------------------------------------
   | Basic Auth
   |--------------------------------------------------------------------------
   |

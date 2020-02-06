@@ -1,6 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
+const Provider = use('App/Models/Provider')
 const File = use('App/Models/File')
 
 class SessionController {
@@ -13,7 +14,6 @@ class SessionController {
       const userData = await User.findBy('email', email)
 
       const { id, name, username, file_id } = userData
-
       const { token } = tokenData
 
       const avatar = await File
@@ -21,11 +21,14 @@ class SessionController {
         .where('id', file_id)
         .first()
 
+      const provider = false;
+
       const user = {
         id,
         name,
         username,
         email,
+        provider,
         avatar
       }
 
@@ -37,7 +40,33 @@ class SessionController {
     }
 
     if (userMode ==='B') {
-      console.log('É um prestdor, bora trampa');
+
+      const tokenData = await auth.authenticator('session2').attempt(email, password)
+      const userData = await Provider.findBy('email', email)
+
+      const { id, name, username, file_id } = userData
+      const { token } = tokenData
+
+      const avatar = await File
+        .query()
+        .where('id', file_id)
+        .first()
+
+      const provider = true;
+
+      const user = {
+        id,
+        name,
+        username,
+        email,
+        provider,
+        avatar
+      }
+
+      return response.json({
+        user,
+        token
+      });
     }
 
   }

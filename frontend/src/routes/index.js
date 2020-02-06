@@ -52,7 +52,7 @@ class Routes extends Component  {
       <Route path='/delete-task/:id' exact component={TaskModalDelete} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
 
-      <Route path="/dash-prov" component={DashProv} isPrivate />
+      <Route path="/dash-prov" component={DashProv} isPrivateProv />
 
       <Route path="/" component={() => <h1>Error 404</h1>} />
     </Switch>

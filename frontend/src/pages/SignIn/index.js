@@ -43,7 +43,6 @@ export default function SignIn() {
           />
         </Container>
 
-
         <button type="submit">{loading ? 'Carregando...' : 'Acessar'}</button>
 
         <Link to="/forgot">

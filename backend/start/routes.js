@@ -12,6 +12,8 @@ Route.post('users', 'UserController.store').validator('User')
 Route.put('users', 'UserController.update').middleware(['auth'])
 // Route.put('users', 'UserController.update').validator('Profile').middleware(['auth'])
 
+Route.post('providers', 'ProviderController.store').validator('Provider')
+
 Route.post('sessions', 'SessionController.store').validator('Session')
 
 Route.post('passwords', 'ForgotPasswordController.store').validator('ForgotPassword')

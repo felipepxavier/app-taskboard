@@ -16,7 +16,7 @@ export function* createTask({ payload }) {
       idsImages
     } = payload.data;
 
-      const provider_id = 1;
+      const provider_id = 2;
       const status = 'Pendente';
 
     const response = yield call(api.post, 'tasks', {
