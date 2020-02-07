@@ -8,7 +8,6 @@ import PreviewModal from './PreviewModal';
 
 export default function TableRow(props) {
   return (
-
       <Task>
         <td> <PreviewModal task={props.obj}/> </td>
 

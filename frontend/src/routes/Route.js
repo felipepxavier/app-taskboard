@@ -15,28 +15,21 @@ export default function RouteWrapper({
 }) {
   const { signed } = store.getState().auth;
 
-
-
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
   }
-
-  if (signed && !isPrivate && !isPrivateProv) {
-    return <Redirect to="/dashboard" />;
-  }
-
-
 
   if (!signed && isPrivateProv) {
     return <Redirect to="/" />;
   }
 
-  if (signed && isPrivateProv) {
-    return <Redirect to="/dash-prov" />;
-  }
+  // if (signed && !isPrivate && !isPrivateProv) {
+  //   return <Redirect to="/dashboard" />;
+  // }
 
-
-
+  // if (signed && isPrivateProv) {
+  //   return <Redirect to="/prov-dash" />;
+  // }
 
   const Layout = signed ? DefaultLayout : AuthLayout;
 
@@ -54,11 +47,11 @@ export default function RouteWrapper({
 
 RouteWrapper.propTypes = {
   isPrivate: PropTypes.bool,
-  // isPrivateProv: PropTypes.bool,
+  isPrivateProv: PropTypes.bool,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 };
 
 RouteWrapper.defaultProps = {
   isPrivate: false,
-  // isPrivateProv: false,
+  isPrivateProv: false,
 };

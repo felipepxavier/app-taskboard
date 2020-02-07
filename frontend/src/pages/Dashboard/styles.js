@@ -38,8 +38,6 @@ export const Container = styled.div`
     text-align: left;
   }
 
-
-
   .btn-action{
     width: 50px;
     background-color: #d6d5d5;
@@ -75,8 +73,6 @@ export const Container = styled.div`
     text-align: center;
     color: #fff;
   }
-
-
 
 `;
 

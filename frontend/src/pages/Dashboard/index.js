@@ -24,12 +24,10 @@ export default function Dashboard() {
     async function loadTask() {
       const response = await api.get('tasks');
       const data = response.data;
-      console.log(data)
+      // console.log(data)
       setTask(data);
     }
     loadTask();
-    // console.log('executando ainda --" ');
-
   }, []);
 
   const sortTypes = {
@@ -64,7 +62,6 @@ export default function Dashboard() {
   };
 
   useMemo(() => {
-
     if (current_task){
       const newTask = current_task.find(element => element);
       const newList = [...task, newTask]
@@ -73,7 +70,6 @@ export default function Dashboard() {
   }, [current_task]);
 
   useMemo(() => {
-
     if (removing_task){
       const old_task = task.find(element => element.id == removing_task);
       for( var i = 0; i < task.length; i++){
@@ -87,7 +83,6 @@ export default function Dashboard() {
   }, [removing_task]);
 
   useMemo(() => {
-
   if (editing_task) {
     let newTask = editing_task.find(element => element);
     let old_task = task.find(element => element.id === newTask.id);
@@ -117,7 +112,6 @@ export default function Dashboard() {
         <tbody>
         {taskRow()}
         </tbody>
-
     </table>
 
     </Container>

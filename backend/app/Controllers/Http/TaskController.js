@@ -9,6 +9,7 @@ const Database = use('Database')
 class TaskController {
 
   async index ({ request, response, auth }) {
+
     const user_id = auth.user.id;
 
     const tasks = await Task.query()

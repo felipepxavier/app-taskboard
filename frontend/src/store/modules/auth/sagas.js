@@ -22,19 +22,16 @@ export function* signIn({ payload }) {
     yield put(signInSuccess(token, user));
 
     if (user.provider) {
-      console.log('é provider');
+      // console.log('é provider')
       history.push('/dash-prov');
-      return
     }else {
-      console.log('nao é');
-      console.log(user.provider);
+      // console.log('nao é')
       history.push('/dashboard');
-      return
     }
 
   } catch (err) {
     toast.error('Falha na autenticação, verifique seus dados.');
-    console.log(err)
+    // console.log(err)
     yield put(signFailure());
   }
 }

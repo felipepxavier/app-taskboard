@@ -48,11 +48,11 @@ class Routes extends Component  {
       <Route path="/forgot" component={Forgot} />
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route path="/dash-prov" component={DashProv} isPrivateProv />
+
       <Route path='/edit-task/:id' exact component={TaskModalEdit} isPrivate />
       <Route path='/delete-task/:id' exact component={TaskModalDelete} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
-
-      <Route path="/dash-prov" component={DashProv} isPrivateProv />
 
       <Route path="/" component={() => <h1>Error 404</h1>} />
     </Switch>

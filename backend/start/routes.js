@@ -3,7 +3,9 @@
 const Route = use('Route')
 
 Route.post('tasks', 'TaskController.store').middleware(['auth'])
-Route.get('tasks', 'TaskController.index').middleware(['auth'])
+
+Route.get('tasks', 'TaskController.index').middleware('auth:session2,jwt');
+
 Route.get('tasks/:id', 'TaskController.show').middleware(['auth'])
 Route.put('tasks/:id', 'TaskController.update')
 Route.delete('tasks/:id', 'TaskController.destroy')

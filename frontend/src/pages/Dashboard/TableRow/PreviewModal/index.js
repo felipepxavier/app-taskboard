@@ -115,8 +115,7 @@ class PreviewModal extends PureComponent {
 
             {
               images ? images.map(item => {
-                console.log(item);
-                return <a target="_blank" href={item.url}><img src={item.url} alt=""/></a>
+                return <a target="_blank" rel="noopener noreferrer" href={item.url}><img src={item.url} alt=""/></a>
               }) : null
             }
 
