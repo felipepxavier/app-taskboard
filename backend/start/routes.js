@@ -4,15 +4,16 @@ const Route = use('Route')
 
 Route.post('tasks', 'TaskController.store').middleware(['auth'])
 
-Route.get('tasks', 'TaskController.index').middleware('auth:session2,jwt');
+Route.get('allTasks/:provider', 'TaskController.index').middleware('auth:session2,jwt');
 
 Route.get('tasks/:id', 'TaskController.show').middleware(['auth'])
 Route.put('tasks/:id', 'TaskController.update')
 Route.delete('tasks/:id', 'TaskController.destroy')
 
+// Route.put('taskAccept/:id', 'TaskController.update')
+
 Route.post('users', 'UserController.store').validator('User')
 Route.put('users', 'UserController.update').middleware(['auth'])
-// Route.put('users', 'UserController.update').validator('Profile').middleware(['auth'])
 
 Route.post('providers', 'ProviderController.store').validator('Provider')
 

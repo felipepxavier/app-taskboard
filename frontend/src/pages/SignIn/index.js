@@ -17,6 +17,7 @@ const schema = Yup.object().shape({
 });
 
 export default function SignIn() {
+
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.loading);
 
@@ -36,7 +37,7 @@ export default function SignIn() {
         <Input name="email" type="email" placeholder="E-mail" />
         <Input name="password" type="password" placeholder="Senha" />
 
-        <Container>
+        <Container className="group-check">
           <Choice
             name="userMode"
             options={[{ value: 'A', label: 'Cliente' }, { value: 'B', label: 'Prestador' }]}

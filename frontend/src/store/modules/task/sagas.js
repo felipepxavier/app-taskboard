@@ -50,9 +50,25 @@ export function* updateTask({ payload }) {
       description,
       priorityValue,
       deliveryDate,
-      idsImages, } = payload.data;
+      idsImages,
+      provider_id } = payload.data;
 
       const id_current = payload.id_current;
+
+      if (provider_id) {
+        const response = yield call(api.put, `tasks/${id_current}`, {
+          provider_id
+        });
+
+        toast.success('Tarefa aceita com sucesso!');
+
+        const task = response.data;
+        yield put(updateTaskSuccess(task));
+
+        history.push('/dash-prov');
+        return
+      }
+
 
     const response = yield call(api.put, `tasks/${id_current}`, {
       title,
@@ -65,7 +81,6 @@ export function* updateTask({ payload }) {
     toast.success('Tarefa atualizada com sucesso!');
 
     const task = response.data;
-
     yield put(updateTaskSuccess(task));
 
     history.push('/dashboard');

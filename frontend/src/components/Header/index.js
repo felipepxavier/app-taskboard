@@ -10,14 +10,16 @@ import { Container, Content, Profile } from './styles';
 
 export default function Header() {
   const profile = useSelector(state => state.user.profile);
-  // console.log(profile)
 
   return (
     <Container>
       <Content>
         <nav>
           <img src={logo} alt="Kusko" />
-          <Link to="/dashboard">Dashboard</Link>
+
+          {profile.provider ? <Link to="/dash-prov">Dashboard</Link> : <Link to="/dashboard">Dashboard</Link>}
+
+          {profile.provider ? <Link to="/doing">Doing</Link> : null}
         </nav>
 
         <aside>

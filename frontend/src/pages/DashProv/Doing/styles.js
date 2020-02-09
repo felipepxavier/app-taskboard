@@ -7,16 +7,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
-  p.notTask {
-    color: white;
-    font-size: 2em;
-  }
-
-  .btn-sort {
-    border: none;
-    color: white;
-  }
-
   .container {
 	  text-align: center;
 	  overflow: hidden;
@@ -24,6 +14,11 @@ export const Container = styled.div`
 	  margin: 0 auto;
     display: table;
     padding: 0 0 8em 0;
+  }
+
+  .btn-sort {
+    border: none;
+    color: white;
   }
 
   th h1 {

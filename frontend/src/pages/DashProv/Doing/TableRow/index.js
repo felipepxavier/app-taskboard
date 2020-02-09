@@ -5,22 +5,26 @@ import { updateTaskRequest } from '~/store/modules/task/actions';
 
 import { Task } from './styles';
 
-import PreviewModal from '../../Dashboard/TableRow/PreviewModal';
+import history from '~/services/history';
+
+import PreviewModal from '~/pages/Dashboard/TableRow/PreviewModal';
 
 export default function TableRow(props) {
 
   const profile = useSelector(state => state.user.profile);
+  const editing_task = useSelector(state => state.task.editing_task);
+
   const dispatch = useDispatch();
 
-  const handleAccept = () => {
-    const id_current = props.obj.id;
-    const provider_id = profile.id;
+  const handleCommit = () => {
+    // const id_current = props.obj.id;
+    // const provider_id = profile.id;
 
-    const data = {
-      provider_id
-    }
+    // const data = {
+    //   provider_id
+    // }
 
-    dispatch(updateTaskRequest( id_current, data ));
+    // dispatch(updateTaskRequest( id_current, data ));
   }
 
   return (
@@ -44,8 +48,8 @@ export default function TableRow(props) {
           {props.obj.deliveryDate}
         </td>
 
-        <td onClick={handleAccept} className="btn-accept">
-         Aceitar
+        <td onClick={handleCommit} className="btn-commit">
+         Entregar
         </td>
 
       </Task>

@@ -4,16 +4,13 @@ export const Task = styled.tr`
   transition: background .1s ease-in-out;
   background: #ffffff;
 
-
   td {
     padding-top: 2px!important;
     padding-bottom: 2px!important;
   }
 
-  td.btn-accept {
-    color: white;
-    background-color: #64f76c;
-    font-weight: 700;
+  .btn-commit {
+    background-color: #b9f5e9;
     cursor: pointer;
   }
 

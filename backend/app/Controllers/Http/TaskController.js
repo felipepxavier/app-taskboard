@@ -8,17 +8,24 @@ const Database = use('Database')
 
 class TaskController {
 
-  async index ({ request, response, auth }) {
+  async index ({ request, response, auth, params }) {
 
-    const user_id = auth.user.id;
-
-    const tasks = await Task.query()
+    if (params.provider === 'false') {
+      // console.log('é cliente')
+      const user_id = auth.user.id;
+      const tasks = await Task.query()
       .where('user_id', user_id)
       .with('provider.file')
       .with('images')
       .fetch()
+      return tasks
+    }
 
-    return tasks
+    if (params.provider === 'true') {
+      // console.log('é provider')
+      const tasks = await Task.all()
+      return tasks
+    }
   }
 
   async store ({ request, response, auth }) {
@@ -83,6 +90,20 @@ class TaskController {
   async update ({ params, request }) {
     const task = await Task.findOrFail(params.id)
 
+    const { provider_id } = request.only('provider_id');
+
+    if (provider_id) {
+      task.provider_id = provider_id;
+      task.status = 'Em andamento';
+      await task.save()
+
+      const taskProv = await Task.query()
+      .where('id', params.id)
+      .fetch()
+
+      return taskProv
+    }
+
     const data = request.only([
       'title',
       'description',
@@ -95,7 +116,6 @@ class TaskController {
     const images = request.input('idsImages')
 
     task.merge(data)
-
     await task.save()
 
     if (images) {

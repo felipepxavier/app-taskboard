@@ -24,10 +24,16 @@ export const Content = styled.div`
       border-right: 1px solid #fff;
     }
 
+
+
     a {
       text-transform: uppercase;
       font-weight: bold;
       color: #fff;
+
+      & + a {
+        padding-left: 20px;
+      }
     }
   }
 

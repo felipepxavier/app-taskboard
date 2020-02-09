@@ -93,6 +93,7 @@ function TaskModalEdit(props){
     async function loadTaskCurrent() {
       const response = await api.get(`tasks/${id_current}`);
       const data = response.data;
+      console.log(data)
 
       setTitle(data.task.title)
       setDescription(data.task.description)

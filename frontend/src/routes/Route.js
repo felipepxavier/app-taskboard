@@ -13,7 +13,9 @@ export default function RouteWrapper({
   isPrivateProv,
   ...rest
 }) {
+
   const { signed } = store.getState().auth;
+  const { provider } = store.getState().auth.profile;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
@@ -23,13 +25,13 @@ export default function RouteWrapper({
     return <Redirect to="/" />;
   }
 
-  // if (signed && !isPrivate && !isPrivateProv) {
-  //   return <Redirect to="/dashboard" />;
-  // }
+  if (signed && !isPrivateProv && provider) {
+    return <Redirect to="/dash-prov" />;
+  }
 
-  // if (signed && isPrivateProv) {
-  //   return <Redirect to="/prov-dash" />;
-  // }
+  if (signed && !isPrivate && !provider) {
+    return <Redirect to="/dashboard" />;
+  }
 
   const Layout = signed ? DefaultLayout : AuthLayout;
 

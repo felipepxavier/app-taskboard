@@ -15,34 +15,16 @@ export default function DashProv() {
   const [task, setTask] = useState([]);
 
   const profile = useSelector(state => state.user.profile);
-  const editing_task = useSelector(state => state.task.editing_task);
-
-  let myRows = task.filter(( elem ) => elem.provider_id !== profile.id);
 
   useEffect(() => {
     async function loadTask() {
       const response = await api.get('allTasks/true');
-      const data = response.data;
 
+      const data = response.data;
       setTask(data);
     }
     loadTask();
   }, []);
-
-  useMemo(() => {
-    if (editing_task) {
-
-      let newTask = editing_task.find(element => element);
-
-      let old_task = task.find(element => element.id === newTask.id);
-      for( var i = 0; i < task.length; i++){
-        if ( task[i] === old_task) {
-          task.splice(i, 1);
-          setTask(task);
-        }
-      }
-    }
-  }, [editing_task]);
 
   const sortTypes = {
     up: {
@@ -62,38 +44,17 @@ export default function DashProv() {
     setCurrentSort(nextSort);
 	};
 
-  function ViewHeader(list) {
-    if (list && list.length !== 0) {
-      return (
-        <>
-          <th><h1>Tarefa</h1></th>
-          <th><h1>Prioridade</h1></th>
-          <th><h1>Entrega</h1></th>
-          <th><h1>Ação</h1></th>
-        </>
-      )
-    } else {
-      return <p className="notTask">Sem novas tarefas! =(</p>
-    }
-  }
-
-  function btnSortTable() {
-    if (myRows && myRows.length !== 0){
-      return(
-        <button className="btn-sort" onClick={onSortChange}>
-          {sortTypes[currentSort].mode}
-        </button>
-      )
-    }
-  }
-
-
   function taskRow() {
+
+    let myList = [];
     return (
       <>
-       { btnSortTable() }
+        <tr className="btn-sort" onClick={onSortChange}>
+        {sortTypes[currentSort].mode}
+        </tr>
         {
-          [...myRows].sort(sortTypes[currentSort].fn).map(obj => (
+          myList = task.filter(( elem ) => elem.provider_id === profile.id ),
+          [...myList].sort(sortTypes[currentSort].fn).map(obj => (
               <TableRow obj={obj} key={obj.id} />
           ))
         }
@@ -101,12 +62,16 @@ export default function DashProv() {
     )
   };
 
+
   return (
     <Container>
       <table className="container">
         <thead>
           <tr>
-            {ViewHeader(myRows)}
+            <th><h1>Tarefa</h1></th>
+            <th><h1>Prioridade</h1></th>
+            <th><h1>Entrega</h1></th>
+            <th><h1>Ação</h1></th>
           </tr>
         </thead>
 
