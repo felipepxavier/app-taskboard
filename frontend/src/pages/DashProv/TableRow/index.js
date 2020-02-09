@@ -5,7 +5,7 @@ import { updateTaskRequest } from '~/store/modules/task/actions';
 
 import { Task } from './styles';
 
-import PreviewModal from '../../Dashboard/TableRow/PreviewModal';
+import PreviewModal from '~/components/PreviewModal';
 
 export default function TableRow(props) {
 

@@ -7,7 +7,8 @@ import { Task } from './styles';
 
 import history from '~/services/history';
 
-import PreviewModal from '~/pages/Dashboard/TableRow/PreviewModal';
+import PreviewModal from '~/components/PreviewModal';
+
 
 export default function TableRow(props) {
 

@@ -6,6 +6,9 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+
+
+
   height: 75px;
   max-width: 900px;
   margin: 0 auto;
@@ -24,7 +27,9 @@ export const Content = styled.div`
       border-right: 1px solid #fff;
     }
 
-
+    /* .active {
+      color: #efc758;
+    } */
 
     a {
       text-transform: uppercase;

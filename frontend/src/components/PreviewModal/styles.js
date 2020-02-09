@@ -8,6 +8,20 @@ export const Preview = styled.tr`
       background-color: #e1f0fd;
   }
 
+  .notImages {
+    border-radius: 4px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+
+    border: solid 2px #c7deec;
+    border-style: dashed;
+      p {
+        font-weight: bold;
+        color: #1b2a36;
+      }
+  }
+
   .block-images {
     background-color: rgba(133, 175, 191, 0.28);
     border-radius: 4px;
@@ -43,6 +57,10 @@ export const Preview = styled.tr`
 
   .block-flex {
     display: flex;
+  }
+
+  .block-prev-data {
+    width: 100%;
   }
 
   .block-prev-description {

@@ -3,7 +3,7 @@ import { Button, DialogContainer } from 'react-md';
 import { Preview } from './styles';
 import { connect } from 'react-redux';
 
-import {MdDateRange, MdPriorityHigh, MdShortText, MdTrendingUp, MdAccountBox, MdAttachment} from 'react-icons/md';
+import {MdDateRange, MdPriorityHigh, MdShortText, MdTrendingUp, MdAccountBox, MdAttachment, MdInfo} from 'react-icons/md';
 
 
 class PreviewModal extends PureComponent {
@@ -44,8 +44,9 @@ class PreviewModal extends PureComponent {
     const { content } = this.state;
 
     const provider = content.provider;
+    console.log(content)
     const provData = {...provider}
-
+    console.log(provData)
     const images = content.images;
 
     const actions = [{
@@ -53,6 +54,32 @@ class PreviewModal extends PureComponent {
       primary: true,
       children: 'Fechar',
     }];
+
+
+    const handleImages =() => {
+
+      if(images && images.length !== 0) {
+        return(
+          <section className="block-images">
+           <div>
+              <MdAttachment size={20} />
+              <strong>imagens: </strong>
+            </div>
+            {
+              images ? images.map(item => {
+                return <a target="_blank" rel="noopener noreferrer" href={item.url}><img src={item.url} alt=""/></a>
+              }) : null
+            }
+          </section>
+        )
+      }else {
+        return (
+          <section className="notImages">
+           <MdInfo size={20} color="#4b6de8" /> <p>Sem anexos</p>
+          </section>
+        )
+      }
+    }
 
     return (
 
@@ -107,19 +134,8 @@ class PreviewModal extends PureComponent {
               </div>
             </section>
           </section>
-          <section className="block-images">
-              <div>
-                <MdAttachment size={20} />
-                <strong>imagens: </strong>
-              </div>
 
-            {
-              images ? images.map(item => {
-                return <a target="_blank" rel="noopener noreferrer" href={item.url}><img src={item.url} alt=""/></a>
-              }) : null
-            }
-
-          </section>
+          {handleImages()}
         </DialogContainer>
       </Preview>
     );

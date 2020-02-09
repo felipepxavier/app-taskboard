@@ -13,6 +13,12 @@ export const Container = styled.div`
     color: white;
   }
 
+  .notTask {
+    color: #ccd2d8;
+    font-size: 2em;
+    padding-top: 40px;
+  }
+
   .container {
 	  text-align: center;
 	  overflow: hidden;

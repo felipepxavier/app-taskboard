@@ -17,7 +17,7 @@ export default function DashProv() {
   const profile = useSelector(state => state.user.profile);
   const editing_task = useSelector(state => state.task.editing_task);
 
-  let myRows = task.filter(( elem ) => elem.provider_id !== profile.id);
+  let myRows = task.filter(( elem ) => (elem.provider_id !== profile.id) && ( elem.provider_id === 2));
 
   useEffect(() => {
     async function loadTask() {

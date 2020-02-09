@@ -13,6 +13,7 @@ export const Container = styled.div`
   }
 
   .btn-sort {
+    background: transparent;
     border: none;
     color: white;
   }

@@ -46,14 +46,37 @@ export default function Dashboard() {
 		if (currentSort === 'down') nextSort = 'up';
 		else if (currentSort === 'up') nextSort = 'down';
     setCurrentSort(nextSort);
-	};
+  };
+
+  function ViewHeader(list) {
+    if (list && list.length !== 0) {
+      return (
+        <>
+          <th><h1>Tarefa</h1></th>
+          <th><h1>Prioridade</h1></th>
+          <th><h1>Entrega</h1></th>
+          <th><h1>Ação</h1></th>
+        </>
+      )
+    } else {
+      return <p className="notTask">Sem tarefas cadastradas</p>
+    }
+  }
+
+  function btnSortTable() {
+    if (task && task.length !== 0){
+      return(
+        <button className="btn-sort" onClick={onSortChange}>
+          {sortTypes[currentSort].mode}
+        </button>
+      )
+    }
+  }
 
   function taskRow() {
     return (
       <>
-        <button className="btn-sort" onClick={onSortChange}>
-        {sortTypes[currentSort].mode}
-        </button>
+      { btnSortTable() }
         {[...task].sort(sortTypes[currentSort].fn).map(obj => (
             <TableRow obj={obj} key={obj.id} />
         ))}
@@ -102,11 +125,7 @@ export default function Dashboard() {
     <table className="container">
         <thead>
           <tr>
-            <th><h1>Tarefa</h1></th>
-            <th><h1>Proprietário</h1></th>
-            <th><h1>Status</h1></th>
-            <th><h1>Prioridade</h1></th>
-            <th><h1>Entrega</h1></th>
+          {ViewHeader(task)}
           </tr>
         </thead>
         <tbody>

@@ -4,9 +4,16 @@ import { Task } from './styles';
 
 import ButtonAction from '../ButtonAction';
 import { Tooltipped } from 'react-md';
-import PreviewModal from './PreviewModal';
+import PreviewModal from '~/components/PreviewModal';
 
 export default function TableRow(props) {
+
+  const avatar = (
+    props.obj.provider.file ?
+    props.obj.provider.file.url :
+    'https://api.adorable.io/avatars/51/abott@adorable.png'
+    );
+
   return (
       <Task>
         <td> <PreviewModal task={props.obj}/> </td>
@@ -18,15 +25,12 @@ export default function TableRow(props) {
               >
             <td className="avatar-prov">{
                 <img
-                  src={
-                    props.obj.provider.file.url ||
-                    'https://api.adorable.io/avatars/51/abott@adorable.png'
-                  }
+                  src={avatar}
                   alt="Foto perfil"
                 />
             }</td>
             </Tooltipped>
-            <td>{props.obj.status}</td>
+            <td>{props.obj.status ? props.obj.status : "Pendente" }</td>
             <td className={(
               props.obj.priorityValue === 'Baixa') ?
               'baixa' :

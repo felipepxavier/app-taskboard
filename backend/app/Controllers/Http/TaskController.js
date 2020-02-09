@@ -23,7 +23,11 @@ class TaskController {
 
     if (params.provider === 'true') {
       // console.log('é provider')
-      const tasks = await Task.all()
+      const tasks = await Task.query()
+      .with('provider.file')
+      .with('images')
+      .fetch()
+
       return tasks
     }
   }

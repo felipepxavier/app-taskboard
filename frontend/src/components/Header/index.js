@@ -11,15 +11,34 @@ import { Container, Content, Profile } from './styles';
 export default function Header() {
   const profile = useSelector(state => state.user.profile);
 
+
+  // const handleBtnActive = () => {
+  //   const btnContainer = document.querySelector('.nav');
+  //   const btns = btnContainer.getElementsByClassName("btn");
+
+  //   for (var i = 0; i < btns.length; i++) {
+  //     btns[i].addEventListener("click", function() {
+  //       const current = document.getElementsByClassName("active");
+  //       current[0].className = current[0].className.replace(" active", "");
+  //       this.className += " active";
+  //     });
+  //   }
+  // };
+
+  //  window.addEventListener("load", function() {
+  //         handleBtnActive();
+  //       }
+  //   );
+
   return (
     <Container>
       <Content>
-        <nav>
+        <nav className="nav">
           <img src={logo} alt="Kusko" />
 
-          {profile.provider ? <Link to="/dash-prov">Dashboard</Link> : <Link to="/dashboard">Dashboard</Link>}
+          {profile.provider ? <Link className="btn active" to="/dash-prov">Dashboard</Link> : <Link className="btn active" to="/dashboard">Dashboard</Link>}
 
-          {profile.provider ? <Link to="/doing">Doing</Link> : null}
+          {profile.provider ? <Link className="btn" to="/doing">Doing</Link> : null}
         </nav>
 
         <aside>
