@@ -27,9 +27,9 @@ export const Content = styled.div`
       border-right: 1px solid #fff;
     }
 
-    /* .active {
+    .active {
       color: #efc758;
-    } */
+    }
 
     a {
       text-transform: uppercase;

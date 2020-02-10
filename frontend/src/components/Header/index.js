@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import Notifications from '~/components/Notifications';
 
@@ -11,41 +11,22 @@ import { Container, Content, Profile } from './styles';
 export default function Header() {
   const profile = useSelector(state => state.user.profile);
 
-
-  // const handleBtnActive = () => {
-  //   const btnContainer = document.querySelector('.nav');
-  //   const btns = btnContainer.getElementsByClassName("btn");
-
-  //   for (var i = 0; i < btns.length; i++) {
-  //     btns[i].addEventListener("click", function() {
-  //       const current = document.getElementsByClassName("active");
-  //       current[0].className = current[0].className.replace(" active", "");
-  //       this.className += " active";
-  //     });
-  //   }
-  // };
-
-  //  window.addEventListener("load", function() {
-  //         handleBtnActive();
-  //       }
-  //   );
-
   const handleMenu = () => {
 
     if (profile.provider) {
       return (
         <>
-          <Link className="btn active" to="/dash-prov">Dashboard</Link>,
-          <Link className="btn" to="/doing">Doing</Link>,
-          <Link className="btn" to="/done-prov">Done</Link>
+          <NavLink className="btn" activeClassName="active" to="/dash-prov">Dashboard</NavLink>,
+          <NavLink className="btn" activeClassName="active" to="/doing">Doing</NavLink>,
+          <NavLink className="btn" activeClassName="active" to="/done-prov">Done</NavLink>
         </>
       )
     }else {
       return (
         <>
-          <Link className="btn active" to="/dashboard">Dashboard</Link>,
-          <Link className="btn" to="/waiting">Para Aprovação</Link>,
-          <Link className="btn" to="/done">Concluídos</Link>
+          <NavLink className="btn" activeClassName="active" to="/dashboard">Dashboard</NavLink>,
+          <NavLink className="btn" activeClassName="active" to="/waiting">Para Aprovação</NavLink>,
+          <NavLink className="btn" activeClassName="active" to="/done">Concluídos</NavLink>
         </>
       )
     }

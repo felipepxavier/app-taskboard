@@ -16,12 +16,12 @@ class PreviewModal extends PureComponent {
   componentDidUpdate(prevProps) {
 
     if (this.props.newTask !== prevProps.newTask) {
-      console.log(this.props.newTask)
+      // console.log(this.props.newTask)
       let taskOld = this.state.content;
       let newTask = this.props.newTask.find(element => element);
 
       if( newTask.id === taskOld.id) {
-        console.log(newTask.id)
+        // console.log(newTask.id)
         this.setState({ content: newTask });
       }
     }
@@ -55,7 +55,7 @@ class PreviewModal extends PureComponent {
 
 
     const handleImages =() => {
-      console.log(images);
+      // console.log(images);
 
       if(images && images.length !== 0) {
         return(
@@ -83,7 +83,7 @@ class PreviewModal extends PureComponent {
     return (
 
       <Preview>
-        {console.log(content)}
+        {/* {console.log(content)} */}
         <Button flat className="preview-task" onClick={this.show}>{content.title}</Button>
         <DialogContainer
           id="modal-preview"
