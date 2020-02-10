@@ -30,15 +30,33 @@ export default function Header() {
   //       }
   //   );
 
+  const handleMenu = () => {
+
+    if (profile.provider) {
+      return (
+        <>
+          <Link className="btn active" to="/dash-prov">Dashboard</Link>,
+          <Link className="btn" to="/doing">Doing</Link>,
+          <Link className="btn" to="/done-prov">Done</Link>
+        </>
+      )
+    }else {
+      return (
+        <>
+          <Link className="btn active" to="/dashboard">Dashboard</Link>,
+          <Link className="btn" to="/waiting">Para Aprovação</Link>,
+          <Link className="btn" to="/done">Concluídos</Link>
+        </>
+      )
+    }
+  }
+
   return (
     <Container>
       <Content>
         <nav className="nav">
           <img src={logo} alt="Kusko" />
-
-          {profile.provider ? <Link className="btn active" to="/dash-prov">Dashboard</Link> : <Link className="btn active" to="/dashboard">Dashboard</Link>}
-
-          {profile.provider ? <Link className="btn" to="/doing">Doing</Link> : null}
+          { handleMenu()}
         </nav>
 
         <aside>

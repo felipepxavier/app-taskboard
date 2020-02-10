@@ -44,9 +44,7 @@ class PreviewModal extends PureComponent {
     const { content } = this.state;
 
     const provider = content.provider;
-    console.log(content)
-    const provData = {...provider}
-    console.log(provData)
+    const provData = {...provider};
     const images = content.images;
 
     const actions = [{
@@ -57,6 +55,7 @@ class PreviewModal extends PureComponent {
 
 
     const handleImages =() => {
+      console.log(images);
 
       if(images && images.length !== 0) {
         return(

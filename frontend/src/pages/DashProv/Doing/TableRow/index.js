@@ -9,6 +9,7 @@ import history from '~/services/history';
 
 import PreviewModal from '~/components/PreviewModal';
 
+import AnswerModal from '../AnswerModal';
 
 export default function TableRow(props) {
 
@@ -50,7 +51,7 @@ export default function TableRow(props) {
         </td>
 
         <td onClick={handleCommit} className="btn-commit">
-         Entregar
+          <AnswerModal />
         </td>
 
       </Task>

@@ -53,9 +53,11 @@ export default function Dashboard() {
       return (
         <>
           <th><h1>Tarefa</h1></th>
+          <th><h1>Proprietário</h1></th>
+          <th><h1>Status</h1></th>
           <th><h1>Prioridade</h1></th>
           <th><h1>Entrega</h1></th>
-          <th><h1>Ação</h1></th>
+          <th><h1>Ações</h1></th>
         </>
       )
     } else {

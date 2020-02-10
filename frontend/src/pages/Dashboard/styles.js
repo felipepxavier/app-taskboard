@@ -26,6 +26,10 @@ export const Container = styled.div`
 	  margin: 0 auto;
     display: table;
     padding: 0 0 8em 0;
+
+    thead th {
+      padding-bottom: 0;
+    }
   }
 
   .container td, .container th {

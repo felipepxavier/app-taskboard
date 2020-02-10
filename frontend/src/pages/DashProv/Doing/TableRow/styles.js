@@ -10,7 +10,8 @@ export const Task = styled.tr`
   }
 
   .btn-commit {
-    background-color: #b9f5e9;
+    color: #fff;
+    background-color: #6ce6e6;
     cursor: pointer;
   }
 

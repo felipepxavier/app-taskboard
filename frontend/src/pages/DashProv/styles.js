@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
 
   p.notTask {
-    color: white;
+    color: #d6d6d6;
     font-size: 2em;
   }
 
@@ -25,6 +25,11 @@ export const Container = styled.div`
 	  margin: 0 auto;
     display: table;
     padding: 0 0 8em 0;
+
+    thead th {
+      padding-bottom: 0;
+    }
+
   }
 
   th h1 {

@@ -4,8 +4,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
 
   >button {
-    width: 60px;
-    height: 60px;
+    width: 100%;
     padding: 5px;
    }
 
@@ -15,7 +14,7 @@ export const Container = styled.div`
 
   i.mt-plus {
     color: white;
-    font-size: 50px;
+    font-size: 30px;
   }
 
   ul#select-field-task-menu-options {
@@ -35,16 +34,6 @@ export const Container = styled.div`
   .css-1pahdxg-control {
     border-color: #cccccc!important;
     box-shadow: none!important;
-  }
-
-  .selPriority {
-    border: solid 2px #e84b4b;
-    box-shadow: none;
-    border-radius: 4px;
-  }
-
-  .selPriority .css-yk16xz-control, .selPriority .css-1pahdxg-control {
-    border-color:transparent!important;
   }
 
 
@@ -79,7 +68,7 @@ export const Container = styled.div`
 
   .text-description {
     padding-top: 12px;
-    min-height: 100px;
+    min-height: 90px;
     height: 100%;
     font-size: 14px;
   }
@@ -95,36 +84,11 @@ export const Container = styled.div`
     border-right: 1px solid #263847;
   }
 
-  #selectPri {
-    margin-top: 50px;
-    width: 200px;
-    max-height: 100%;
-    margin-bottom: 50px;
-    background-color: #132838;
 
-    > div {
-      min-height: 44px;
-    }
-
-    * {
-      box-shadow: none!important;
-    }
-
-    > div, > div:hover{
-      border: solid 2px #54616b96;
-    }
-
-    .css-yk16xz-control, .css-1pahdxg-control, .css-26l3qy-menu {
-      background-color: #132838;
-      color: #fff;
-      height: 44px;
-
-    }
-  }
 
   .block-file{
     width: 400px;
-    padding-top:50px;
+    padding-top: 20px;
 
   }
 

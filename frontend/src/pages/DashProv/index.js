@@ -73,7 +73,7 @@ export default function DashProv() {
         </>
       )
     } else {
-      return <p className="notTask">Sem novas tarefas! =(</p>
+      return <p className="notTask">Sem novas tarefas</p>
     }
   }
 
