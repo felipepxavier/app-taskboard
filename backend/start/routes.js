@@ -10,6 +10,9 @@ Route.get('tasks/:id', 'TaskController.show').middleware(['auth'])
 Route.put('tasks/:id', 'TaskController.update')
 Route.delete('tasks/:id', 'TaskController.destroy')
 
+Route.post('tasksAnswers', 'TaskAnswerController.store')
+Route.get('tasksAnswers', 'TaskAnswerController.index')
+
 // Route.put('taskAccept/:id', 'TaskController.update')
 
 Route.post('users', 'UserController.store').validator('User')
@@ -50,7 +53,7 @@ Route.group(() => {
   //     ]
   //   ))
 
-}).middleware(['auth'])
+}).middleware('auth:session2,jwt')
 
 
 

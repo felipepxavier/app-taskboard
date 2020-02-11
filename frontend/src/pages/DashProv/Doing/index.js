@@ -15,9 +15,27 @@ export default function DashProv() {
   const [task, setTask] = useState([]);
 
   const profile = useSelector(state => state.user.profile);
+  const current_task_answer = useSelector(state => state.task.current_task_answer);
+
+  useMemo(() => {
+    if (current_task_answer){
+      console.log('entrou para remover!')
+      console.log(current_task_answer)
+      const old_task = task.find(element => element.id == current_task_answer);
+      for( var i = 0; i < task.length; i++){
+        if ( task[i] === old_task) {
+          task.splice(i, 1);
+        }
+      }
+      const newList = [...task]
+      setTask(newList)
+    }
+  }, [current_task_answer]);
 
   useEffect(() => {
     async function loadTask() {
+      console.log('lendo tudo')
+      console.log(current_task_answer)
       const response = await api.get('allTasks/true');
 
       const data = response.data;

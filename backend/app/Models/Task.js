@@ -27,6 +27,10 @@ class Task extends Model {
     return this.belongsToMany('App/Models/File','task_id','file_id').pivotTable('task_id_images')
   }
 
+  // answers () {
+  //   return this.belongsToMany('App/Models/TaskAnswer','task_id','file_id').pivotTable('task_answers')
+  // }
+
 }
 
 module.exports = Task

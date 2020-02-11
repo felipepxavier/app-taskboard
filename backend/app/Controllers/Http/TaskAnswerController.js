@@ -1,25 +1,44 @@
 'use strict'
 
+const Task = use('App/Models/Task')
 const TaskAnswer = use('App/Models/TaskAnswer')
 
 class TaskAnswerController {
 
+  // async index ({ request, params }) {
+
+  //     const tasks = await TaskAnswer.query()
+  //     .where('done', true)
+  //     .with('task')
+  //     .fetch()
+
+  //     return tasks
+  // }
+
   async store ({ request, response, auth }) {
 
-    const task_id = request.input('task_id')
-    const imgAnswer = request.input('imgAnswer')
-    const sent = request.input('sent')
+    const { task_id, idsImages } = request.only([
+      'task_id',
+      'idsImages',
+    ])
 
-    const data = {
-      task_id,
-      imgAnswer,
-      sent
+    const task = await Task.findOrFail(task_id)
+
+    if (task) {
+      task.status = 'Para Aprovação';
+      await task.save();
     }
 
-    const task_answer = await TaskAnswer.create(data)
+    const sent = true;
 
-    return task_answer
+    for(let i in idsImages) {
+      const file_id = idsImages[i]
+      let data = {task_id, file_id, sent}
 
+      await TaskAnswer.create(data)
+    }
+
+    return task_id
   }
 }
 

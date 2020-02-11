@@ -1,6 +1,7 @@
 'use strict'
 
 const Task = use('App/Models/Task')
+const TaskAnswer = use('App/Models/TaskAnswer')
 const TaskIdImage = use('App/Models/TaskIdImage')
 const File = use('App/Models/File')
 const Database = use('Database')
@@ -11,7 +12,7 @@ class TaskController {
   async index ({ request, response, auth, params }) {
 
     if (params.provider === 'false') {
-      // console.log('é cliente')
+
       const user_id = auth.user.id;
       const tasks = await Task.query()
       .where('user_id', user_id)
@@ -22,13 +23,36 @@ class TaskController {
     }
 
     if (params.provider === 'true') {
-      // console.log('é provider')
+
       const tasks = await Task.query()
       .with('provider.file')
       .with('images')
       .fetch()
 
-      return tasks
+      const tasksAnswer = await TaskAnswer.query()
+      .where('sent', true)
+      .with('task')
+      .fetch()
+
+      const all_tasks = tasks.toJSON()
+      const tasks_answer = tasksAnswer.toJSON()
+
+      let taskPassed = [];
+      taskPassed = all_tasks;
+
+      tasks_answer.map( answer => {
+        let isAnswer = answer.task_id
+
+        all_tasks.map((item, index) => {
+            let idTask = item.id
+
+            if(idTask === isAnswer) {
+              taskPassed.splice(index, 1)
+            }
+        })
+      })
+
+      return taskPassed
     }
   }
 

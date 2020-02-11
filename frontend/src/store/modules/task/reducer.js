@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   removing_task: null,
   ids_images: null,
   loading: false,
+  current_task_answer: null,
 };
 
 export default function task(state = INITIAL_STATE, action) {
@@ -16,6 +17,19 @@ export default function task(state = INITIAL_STATE, action) {
         // console.log(draft.ids_images)
         break;
       }
+
+
+      case '@task/ANSWER_TASK_REQUEST': {
+        draft.loading = true;
+        break;
+      }
+      case '@task/ANSWER_TASK_SUCCESS': {
+        draft.current_task_answer = action.payload.task;
+        draft.loading = false;
+        break;
+      }
+
+
       case '@task/CREATE_TASK_REQUEST': {
         draft.loading = true;
         break;
@@ -25,6 +39,8 @@ export default function task(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
       }
+
+
       case '@task/UPDATE_TASK_SUCCESS': {
         draft.editing_task = action.payload.task;
         // draft.loading = false;

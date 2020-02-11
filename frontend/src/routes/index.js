@@ -49,6 +49,7 @@ class Routes extends Component  {
       <Route path="/forgot" component={Forgot} />
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
+      {/* <Route path="/waiting" component={Dashboard} isPrivate /> */}
 
       <Route path="/dash-prov" component={DashProv} isPrivateProv />
       <Route path="/doing" component={Doing} isPrivateProv />

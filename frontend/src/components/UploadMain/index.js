@@ -113,8 +113,6 @@ class UploadMain extends Component {
   };
 
   handleDelete = async id => {
-    // console.log('deletando')
-    // console.log(id)
     await api.delete(`files/${id}`);
 
     this.props.getIdsImages('remove'+id);
@@ -132,10 +130,10 @@ class UploadMain extends Component {
 
     return (
         <Content>
-          {console.log('this.props.images::')}
+          {/* {console.log('this.props.images::')}
           {console.log(this.props.images)}
           {console.log('uploadedFiles::')}
-          {console.log(uploadedFiles)}
+          {console.log(uploadedFiles)} */}
 
           <Upload onUpload={this.handleUpload} />
           {!!uploadedFiles.length && (

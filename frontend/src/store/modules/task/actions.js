@@ -12,6 +12,13 @@ export function createTaskRequest(data) {
   };
 }
 
+export function answerTaskRequest(data) {
+  return {
+    type: '@task/ANSWER_TASK_REQUEST',
+    payload: { data },
+  };
+}
+
 export function updateTaskRequest(id_current, data) {
   return {
     type: '@task/UPDATE_TASK_REQUEST',
@@ -29,6 +36,13 @@ export function deleteTaskRequest(id_current) {
 export function createTaskSuccess(task) {
   return {
     type: '@task/CREATE_TASK_SUCCESS',
+    payload: { task },
+  };
+}
+
+export function answerTaskSuccess(task) {
+  return {
+    type: '@task/ANSWER_TASK_SUCCESS',
     payload: { task },
   };
 }

@@ -3,7 +3,15 @@ import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
-import { createTaskSuccess, createFailure, updateTaskSuccess, updateFailure, deleteTaskSuccess, deleteFailure } from './actions';
+import {
+  createTaskSuccess,
+  createFailure,
+  updateTaskSuccess,
+  updateFailure,
+  deleteTaskSuccess,
+  deleteFailure,
+  answerTaskSuccess
+} from './actions';
 
 export function* createTask({ payload }) {
 
@@ -107,8 +115,32 @@ export function* deleteTask({ payload }) {
   }
 }
 
+export function* answerTask({ payload }) {
+
+  try {
+      const {task_id, description, idsImages} = payload.data;
+
+     const response = yield call(api.post, 'tasksAnswers', {
+      task_id,
+      description,
+      idsImages
+    });
+
+    toast.success('Tarefa respondida com sucesso!');
+
+    const task = response.data;
+
+     yield put(answerTaskSuccess(task));
+
+  } catch (err) {
+    toast.error('Falha na remoção');
+    yield put(deleteFailure());
+  }
+}
+
 export default all([
   takeLatest('@task/CREATE_TASK_REQUEST', createTask),
   takeLatest('@task/UPDATE_TASK_REQUEST', updateTask),
   takeLatest('@task/DELETE_TASK_REQUEST', deleteTask),
+  takeLatest('@task/ANSWER_TASK_REQUEST', answerTask),
 ]);

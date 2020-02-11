@@ -13,6 +13,10 @@ class TaskAnswer extends Model {
     return this.belongsTo('App/Models/Task')
   }
 
+  // answers () {
+  //   return this.belongsToMany('App/Models/File','task_id','file_id').pivotTable('task_id_images')
+  // }
+
 }
 
 module.exports = TaskAnswer

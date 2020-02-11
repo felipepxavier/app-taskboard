@@ -19,6 +19,7 @@ export default function TableRow(props) {
   const dispatch = useDispatch();
 
   const handleCommit = () => {
+    console.log('entregue')
     // const id_current = props.obj.id;
     // const provider_id = profile.id;
 
@@ -50,8 +51,8 @@ export default function TableRow(props) {
           {props.obj.deliveryDate}
         </td>
 
-        <td onClick={handleCommit} className="btn-commit">
-          <AnswerModal />
+        <td className="btn-commit">
+          <AnswerModal task={props.obj.id} />
         </td>
 
       </Task>

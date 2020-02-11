@@ -20,31 +20,29 @@ import {
   // FileInput,
   // SelectField,
   Toolbar,
-  DatePicker,
 } from 'react-md';
 
 import Select, { components } from 'react-select';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { createTaskRequest } from '~/store/modules/task/actions';
+// import { createTaskRequest } from '~/store/modules/task/actions';
+import { answerTaskRequest } from '~/store/modules/task/actions';
 
 import { Container } from './styles';
 
 import UploadMain from '~/components/UploadMain';
 
-const schema = Yup.object().shape({
-  title: Yup.string().required('Informe o título'),
-  description: Yup.string().required('Informe a descrição da tarefa')
+// const schema = Yup.object().shape({
+//   description: Yup.string(),
+// });
 
-});
-
-export default function AnswerModal(){
+export default function AnswerModal(props){
 
   const [ visible, setVisible ] = useState(false);
   const [ renderNode, setRenderNode ] = useState(null);
 
   const [ idsImages, setIdsImages ] = useState([]);
-  const [ description, setDescription ] = useState('');
+  // const [ description, setDescription ] = useState('');
 
   const dispatch = useDispatch();
 
@@ -82,12 +80,14 @@ export default function AnswerModal(){
 
   const handleSubmit = (d) => {
 
+    const task_id = props.task;
+
     const data = {
-      ...d,
+      task_id,
       idsImages
     }
 
-    dispatch(createTaskRequest(data));
+    dispatch(answerTaskRequest(data));
     setIdsImages([]);
     hide()
   };
@@ -117,7 +117,9 @@ export default function AnswerModal(){
           <i className="material-icons mt-plus">send</i>
         </Button>
 
-        <Form schema={schema} onSubmit={handleSubmit}>
+        <Form
+
+        onSubmit={handleSubmit}>
           <DialogContainer
             id="modal-task"
             visible={visible}
@@ -138,13 +140,13 @@ export default function AnswerModal(){
               <section className="md-toolbar-relative content-task">
 
                 <div className="d-flex-column">
-                    <Input
+                    {/* <Input
                       className="text-description"
                       name="description"
                       placeholder="Algum comentário?"
                       label="Comentário: (opcional)"
                       multiline
-                    />
+                    /> */}
 
                   <div className="block-file">
                       <p>Inserir tarefa: (obrigatório)</p>
