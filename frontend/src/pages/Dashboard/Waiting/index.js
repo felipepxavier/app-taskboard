@@ -34,11 +34,12 @@ export default function DashProv() {
 
   useEffect(() => {
     async function loadTask() {
-      console.log('lendo tudo')
-      console.log(current_task_answer)
-      const response = await api.get('tasksProvider');
+      // console.log('lendo tudo')
+      // console.log(current_task_answer)
+      const response = await api.get('taskWaiting');
 
       const data = response.data;
+      console.log(data)
       setTask(data);
     }
     loadTask();

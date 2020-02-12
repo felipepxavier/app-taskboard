@@ -118,11 +118,11 @@ export function* deleteTask({ payload }) {
 export function* answerTask({ payload }) {
 
   try {
-      const {task_id, description, idsImages} = payload.data;
+      const {task_id, chat, idsImages} = payload.data;
 
-     const response = yield call(api.post, 'tasksAnswers', {
+     const response = yield call(api.post, 'tasksProvider', {
       task_id,
-      description,
+      chat,
       idsImages
     });
 

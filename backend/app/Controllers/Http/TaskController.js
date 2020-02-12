@@ -9,9 +9,9 @@ const Database = use('Database')
 
 class TaskController {
 
-  async index ({ request, response, auth, params }) {
+  async index ({ auth }) {
 
-    if (params.provider === 'false') {
+    // if (params.provider === 'false') {
 
       const user_id = auth.user.id;
       const tasks = await Task.query()
@@ -19,41 +19,43 @@ class TaskController {
       .with('provider.file')
       .with('images')
       .fetch()
+
+
       return tasks
-    }
+    // }
 
-    if (params.provider === 'true') {
+    // if (params.provider === 'true') {
 
-      const tasks = await Task.query()
-      .with('provider.file')
-      .with('images')
-      .fetch()
+    //   const tasks = await Task.query()
+    //   .with('provider.file')
+    //   .with('images')
+    //   .fetch()
 
-      const tasksAnswer = await TaskAnswer.query()
-      .where('sent', true)
-      .with('task')
-      .fetch()
+    //   const tasksAnswer = await TaskAnswer.query()
+    //   .where('sent', true)
+    //   .with('task')
+    //   .fetch()
 
-      const all_tasks = tasks.toJSON()
-      const tasks_answer = tasksAnswer.toJSON()
+    //   const all_tasks = tasks.toJSON()
+    //   const tasks_answer = tasksAnswer.toJSON()
 
-      let taskPassed = [];
-      taskPassed = all_tasks;
+    //   let taskPassed = [];
+    //   taskPassed = all_tasks;
 
-      tasks_answer.map( answer => {
-        let isAnswer = answer.task_id
+    //   tasks_answer.map( answer => {
+    //     let isAnswer = answer.task_id
 
-        all_tasks.map((item, index) => {
-            let idTask = item.id
+    //     all_tasks.map((item, index) => {
+    //         let idTask = item.id
 
-            if(idTask === isAnswer) {
-              taskPassed.splice(index, 1)
-            }
-        })
-      })
+    //         if(idTask === isAnswer) {
+    //           taskPassed.splice(index, 1)
+    //         }
+    //     })
+    //   })
 
-      return taskPassed
-    }
+    //   return taskPassed
+    // }
   }
 
   async store ({ request, response, auth }) {

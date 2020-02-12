@@ -22,7 +22,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function loadTask() {
-      const response = await api.get('allTasks/false');
+      const response = await api.get('tasks');
       const data = response.data;
       // console.log(data)
       setTask(data);

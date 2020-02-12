@@ -6,6 +6,7 @@ import SignIn from '../pages/SignIn';
 import Forgot from '../pages/Forgot';
 
 import Dashboard from '../pages/Dashboard';
+import Waiting from '../pages/Dashboard/Waiting';
 import TaskModalEdit from '../pages/Dashboard/TaskModalEdit';
 import TaskModalDelete from '../pages/Dashboard/TaskModalDelete';
 
@@ -49,7 +50,7 @@ class Routes extends Component  {
       <Route path="/forgot" component={Forgot} />
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
-      {/* <Route path="/waiting" component={Dashboard} isPrivate /> */}
+      <Route path="/waiting" component={Waiting} isPrivate />
 
       <Route path="/dash-prov" component={DashProv} isPrivateProv />
       <Route path="/doing" component={Doing} isPrivateProv />

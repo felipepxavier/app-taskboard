@@ -21,7 +21,7 @@ export default function DashProv() {
 
   useEffect(() => {
     async function loadTask() {
-      const response = await api.get('allTasks/true');
+      const response = await api.get('tasksProvider');
       const data = response.data;
 
       setTask(data);

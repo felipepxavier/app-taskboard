@@ -83,7 +83,6 @@ export default function AnswerModal(props){
     const task_id = props.task;
 
     const data = {
-      ...d,
       task_id,
       idsImages
     }
@@ -141,13 +140,13 @@ export default function AnswerModal(props){
               <section className="md-toolbar-relative content-task">
 
                 <div className="d-flex-column">
-                    <Input
-                      className="text-chat"
-                      name="chat"
+                    {/* <Input
+                      className="text-description"
+                      name="description"
                       placeholder="Algum comentário?"
                       label="Comentário: (opcional)"
                       multiline
-                    />
+                    /> */}
 
                   <div className="block-file">
                       <p>Inserir tarefa: (obrigatório)</p>
