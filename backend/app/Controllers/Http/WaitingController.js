@@ -9,91 +9,46 @@ class WaitingController {
 
       const user_id = auth.user.id;
 
-/*** ================================================= */
-
-// function removeRows(prev, next) {
-
-//   let listTask = [];
-
-//   if(prev && next) {
-
-//     if ( next.taskC.id == prev.taskC.id) {
-//       let task = prev.taskC;
-//       let img = prev.ansC;
-//       let img2 = next.ansC;
-
-//       const row = {
-//         data:{
-//           task,
-//           img,
-//           img2
-//         }
-//         };
-//       listTask= row;
-//     }
-//   }
-
-//   console.log(listTask)
-// }
-
+      const task = await Task.query()
+      .where('user_id', user_id)
+      .with('answers')
+      .fetch()
 
       const tasksAnswer = await TaskAnswer.query()
-        .where('sent', true)
-        .with('task')
-        .with('image')
-        .fetch()
+      .where('sent', true)
+      .fetch()
 
       const tasks_answer = tasksAnswer.toJSON()
+      const taskAll = task.toJSON()
 
-      // let taskPassed = [];
-      let passed = [];
-      // taskPassed = tasks_answer;
-      let list = []
-      tasks_answer.map( (answer, index) => {
+      let taskPassed = [];
 
-        if (answer.task.user_id === user_id ) {
-          // taskPassed.splice(index, 1)
-          let taskC = answer.task
-          let ansC = answer.image
+      taskAll.map( task => {
 
-          let val = { taskC, ansC }
-          passed = [...passed, val]
-
-        }
-
-        passed.map( item => {
-          console.log(item.taskC)
-
-          if (list) {
-            list = [...list, item]
-
-           ]
+        tasks_answer.map(answer => {
+          if (task.id === answer.task_id) {
+            taskPassed = [...taskPassed, task]
           }
-        })
+        });
+
       });
 
+      let result = [];
+      function removeDuplicates(array, key) {
+        let lookup = {};
 
-      return passed
+        for(let i=0; i<array.length; i++) {
+            if(!lookup[array[i][key]]){
+                lookup[array[i][key]] = true;
+                result.push(array[i]);
+            }
+        }
+        return result;
+      }
 
+      removeDuplicates(taskPassed, 'id');
 
-        // const all_tasks = tasks.toJSON()
-        // const tasks_answer = tasksAnswer.toJSON()
-
-        // let taskPassed = [];
-        // taskPassed = all_tasks;
-
-        // tasks_answer.map( answer => {
-        //   let isAnswer = answer.task_id
-
-        //   all_tasks.map((item, index) => {
-        //       let idTask = item.id
-
-        //       if(idTask === isAnswer) {
-        //         taskPassed.splice(index, 1)
-        //       }
-        //   })
-        // })
-
+      return result;
 
     }
 }
