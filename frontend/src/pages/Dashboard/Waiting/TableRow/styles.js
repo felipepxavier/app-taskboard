@@ -9,10 +9,20 @@ export const Task = styled.tr`
     padding-bottom: 2px!important;
   }
 
-  .btn-commit {
-    color: #fff;
-    background-color: #6ce6e6;
+  .btn-answer {
     cursor: pointer;
+    background-color: #5cff53;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .btn-commit {
+    cursor: pointer;
+    background-color: #6ce6e6;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 
   &:hover {

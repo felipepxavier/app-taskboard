@@ -72,8 +72,10 @@ export default function DashProv() {
         {sortTypes[currentSort].mode}
         </tr>
         {
-          myList = task.filter(( elem ) => elem.provider_id === profile.id ),
-          [...myList].sort(sortTypes[currentSort].fn).map(obj => (
+
+          // myList = task.filter(( elem ) => elem.provider_id === profile.id ),
+
+          task.sort(sortTypes[currentSort].fn).map(obj => (
               <TableRow obj={obj} key={obj.id} />
           ))
         }
@@ -88,8 +90,7 @@ export default function DashProv() {
         <thead>
           <tr>
             <th><h1>Tarefa</h1></th>
-            <th><h1>Prioridade</h1></th>
-            <th><h1>Entrega</h1></th>
+            <th><h1>Resposta</h1></th>
             <th><h1>Ação</h1></th>
           </tr>
         </thead>

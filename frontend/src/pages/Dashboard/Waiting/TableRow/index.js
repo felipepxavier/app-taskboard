@@ -19,7 +19,11 @@ export default function TableRow(props) {
   const dispatch = useDispatch();
 
   const handleCommit = () => {
-    console.log('entregue')
+
+    return (
+      <AnswerModal task={props.obj.id} />
+    )
+
     // const id_current = props.obj.id;
     // const provider_id = profile.id;
 
@@ -30,6 +34,14 @@ export default function TableRow(props) {
     // dispatch(updateTaskRequest( id_current, data ));
   }
 
+
+  const handleAnswer = () => {
+    const data = props.obj.answers;
+    const data2 = props.obj;
+    console.log(data)
+    console.log(data2)
+  }
+
   return (
       <Task>
 
@@ -37,22 +49,13 @@ export default function TableRow(props) {
           <PreviewModal task={props.obj}/>
         </td>
 
-        <td className={(
-          props.obj.priorityValue === 'Baixa') ?
-          'baixa' :
-          (props.obj.priorityValue === 'Alta') ?
-          'alta' :
-          (props.obj.priorityValue === 'Média') ?
-          'media' :''}>
-            {props.obj.priorityValue}
-          </td>
-
-        <td>
-          {props.obj.deliveryDate}
+        <td className="btn-answer" onClick={handleAnswer}>
+          Visualizar
         </td>
 
-        <td className="btn-commit">
-          <AnswerModal task={props.obj.id} />
+
+        <td className="btn-commit" onClick={handleCommit}>
+          Aprovar
         </td>
 
       </Task>

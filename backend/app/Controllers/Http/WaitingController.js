@@ -11,6 +11,7 @@ class WaitingController {
 
       const task = await Task.query()
       .where('user_id', user_id)
+      .with('images')
       .with('answers')
       .fetch()
 
